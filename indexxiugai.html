@@ -18,14 +18,14 @@
             --ink: var(--midnight);
             --muted: rgba(13, 30, 61, 0.7);
             --hello-yellow: var(--ivory);
-            --hello-red: #e01f26;
+            --hello-red: #c7db54;
             --line: rgba(13, 30, 61, 0.08);
             --panel: #FFFFFF;
             --teal: var(--cobalt);
             --coral: var(--lemon);
             --gold: var(--lemon);
             --blue: var(--cobalt);
-            --shadow: 0 22px 60px rgba(13, 30, 61, 0.10);
+            /*--shadow: 0 22px 60px rgba(13, 30, 61, 0.10);*/
         }
 
         * {
@@ -35,8 +35,10 @@
         }
 
         html {
-            scroll-behavior: smooth;
-        }
+    scroll-behavior: smooth;
+    /* 禁止页面全局滚动条，滚动只发生在每个section内部 */
+    overflow: hidden;
+}
 
         body {
             min-height: 100vh;
@@ -92,12 +94,21 @@
         main {
             position: relative;
             z-index: 1;
+            /* 新增核心两行 */
+            height: 100vh;
+            overflow: hidden;
         }
 
         .section {
-            padding: 104px max(22px, calc((100vw - 1120px) / 2));
-        }
-
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    /* 上下改为 32px，左右不变 */
+    padding: 0 clamp(14px, 2vw, 22px);
+}
+/*菜单栏规格设置*/
         .section:not(.hero) {
             position: relative;
             background: var(--ivory);
@@ -122,18 +133,19 @@
         }
 
         .section-nav {
-            position: relative;
-            z-index: 2;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: center;
-            justify-content: space-between;
-            gap: 18px;
-            padding: 0 0 clamp(64px, 8vw, 110px);
-            border-bottom: 0;
-            background: transparent;
-            backdrop-filter: none;
-        }
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    /* 改为：上下内边距统一缩小，左右0 */
+    padding: 12px 0 24px 0;
+    border-bottom: 0;
+    background: transparent;
+    backdrop-filter: none;
+}
 
         .site-name {
             color: var(--midnight);
@@ -181,11 +193,15 @@
         }
 
         .hero {
-            min-height: 100vh;
-            display: grid;
-            align-items: stretch;
-            padding: 0;
-        }
+    height: 100vh;
+    display: grid;
+    align-items: stretch;
+    padding: 0;
+    /* 首屏不需要内部滚动，溢出直接隐藏 */
+    overflow: hidden;
+    /* 覆盖section的flex布局 */
+    flex: unset;
+}
 
         .hero-stage {
             position: relative;
@@ -273,7 +289,7 @@
             border-radius: 999px;
             padding: 11px 16px;
             color: var(--hello-red);
-            font-size: 12px;
+            font-size: 18px;
             font-weight: 820;
             letter-spacing: 0.08em;
             opacity: 0;
@@ -681,24 +697,25 @@
         }
 
         .section:not(.hero) {
-            padding-top: 132px;
-            padding-bottom: 132px;
-        }
+    padding-top: 25px;
+    padding-bottom: 132px;
+}
 
         .section:not(.hero)::after {
             display: none;
         }
 
         .section-nav {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: start;
-            padding-top: 30px;
-            padding-bottom: 30px;
-            border-bottom: 0;
-            background: rgba(250, 249, 244, 0.82);
-            backdrop-filter: blur(7px);
-        }
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    /* 原 padding-top:30px; 改成极小值 */
+    padding-top: 0px;
+    padding-bottom: 12px;
+    border-bottom: 0;
+    background: rgba(250, 249, 244, 0.82);
+    backdrop-filter: blur(7px);
+}
 
         .site-name {
             font-family: "Courier Prime", "Source Han Sans SC", "Noto Sans SC", monospace;
@@ -943,35 +960,59 @@
         }
 
         .about-layout {
-            display: grid;
-            grid-template-columns: minmax(220px, 0.34fr) minmax(520px, 1fr);
-            gap: clamp(24px, 3vw, 48px);
-            align-items: start;
-            width: 100%;
-            max-width: none;
-            margin: 0 auto;
-            padding-top: 0;
-        }
-
+    display: grid;
+    grid-template-columns: minmax(220px, 0.34fr) minmax(520px, 1fr);
+    gap: clamp(24px, 3vw, 48px);
+    align-items: start;
+    width: 100%;
+    max-width: none;
+    margin: 70px auto 0 auto; /* 上边距控制下移，数值越大越靠下 */
+    padding-top: 0;
+    padding-left: 200px;
+}
+.resume-link-group a {
+    color: var(--cobalt);
+    text-decoration: underline;
+}
+.resume-link-group a:hover {
+    color: var(--midnight);
+}
+.about-copy {
+    line-height: 1.3;
+}
+.about-copy p {
+    margin: 0 0 15px 0;
+}
+/* 选中about布局第一栏（照片容器） */
+.about-layout > div:first-child {
+    margin-top: 0px;    /* 往下，数字越大越靠下 */
+    margin-left: -30px;  /* 往左，负数越小越靠左 */
+}
+/* 容器跟随图片原生尺寸，不强制固定宽高 */
+.portrait-placeholder {
+    width: auto;
+    height: auto;
+    overflow: visible;
+    /* 防止超大原图撑破左侧栏，移动端自动缩小，不想限制就删掉这行 */
+    max-width: 100%;
+}
+/* 图片自适应填满，不变形 */
+.portrait-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.about-visual {
+    margin-top: 32px;
+    margin-left: -18px;
+}
         #about {
             padding-left: clamp(14px, 2.2vw, 36px);
             padding-right: clamp(14px, 2.2vw, 36px);
         }
 
-        .portrait-placeholder {
-            width: 50%;
-            aspect-ratio: 1.35 / 1;
-            display: grid;
-            place-items: center;
-            color: rgba(13, 30, 61, 0.36);
-            font-family: "Courier Prime", "Source Han Sans SC", "Noto Sans SC", monospace;
-            font-size: 13px;
-            letter-spacing: 0.12em;
-            background:
-                linear-gradient(90deg, rgba(13, 30, 61, 0.05) 1px, transparent 1px),
-                linear-gradient(rgba(13, 30, 61, 0.035) 1px, transparent 1px);
-            background-size: 34px 34px;
-        }
+        
 
         .about-note {
             margin-top: 42px;
@@ -1038,7 +1079,7 @@
                 min-height: 100vh;
                 grid-template-columns: 1fr;
                 align-items: center;
-                padding: 0 18px;
+                padding: 50 18px;
             }
 
             .phone-drop {
@@ -1153,7 +1194,107 @@
                 padding: 20px;
             }
         }
+    /* 头像动画：无延迟，优先出现 */
+.reveal-img {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: 0s;
+}
+.reveal-img.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 右侧文字动画：延迟0.3s，图片出来后再出现 */
+.reveal-text {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: 0.3s;
+}
+.reveal-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 底部小字逐行动画 */
+.note-lines {
+    position: relative;
+    margin-top: 42px;
+}
+.note-line {
+    display: block;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+/* 每行依次延迟0.18s */
+.note-line:nth-child(1) { transition-delay: 1s; }
+.note-line:nth-child(2) { transition-delay: 1.5s; }
+.note-line:nth-child(3) { transition-delay: 2s; }
+.note-line:nth-child(4) { transition-delay: 2.5s; }
+.note-line:nth-child(5) { transition-delay: 3s; }
+
+/* 触发可见时全部显示 */
+.reveal-img.visible .note-line {
+    opacity: 1;
+    transform: translateY(0);
+}
+    /* 语言切换整行容器，占满整行，菜单下方单独一行 */
+.lang-switch-wrap {
+    grid-column: 1 / -1; /* grid布局自动换行，整行宽度 */
+    margin-top: 8px;    /* 和上方菜单拉开间距 */
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: flex-end; /* 靠右对齐，实现右上角效果 */
+}
+/* 分隔符 / */
+.lang-divider {
+    color: rgba(13, 30, 61, 0.4);
+    font-family: "Courier Prime", "Source Han Sans SC", "Noto Sans SC", monospace;
+    font-size: 14px;
+    letter-spacing: 0.075em;
+}
+/* 语言文字基础样式，和导航链接统一视觉 */
+.lang-option {
+    cursor: pointer;
+    font-family: "Courier Prime", "Source Han Sans SC", "Noto Sans SC", monospace;
+    font-size: 14px;
+    letter-spacing: 0.075em;
+    color: rgba(13, 30, 61, 0.5);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+/* 当前激活语言高亮 */
+[data-lang="zh"] .zh-btn {
+    color: var(--cobalt);
+    text-decoration-color: var(--lemon);
+}
+[data-lang="en"] .en-btn {
+    color: var(--cobalt);
+    text-decoration-color: var(--lemon);
+}
+/* 鼠标悬浮效果 */
+.lang-option:hover {
+    color: var(--cobalt);
+    text-decoration-color: var(--lemon);
+}
+/* 移动端适配缩小字号 */
+@media (max-width: 560px) {
+    .lang-option, .lang-divider {
+        font-size: 12px;
+    }
+    .lang-switch-wrap {
+        margin-top: 6px;
+        justify-content: flex-start; /* 手机端靠左不挤 */
+    }
+}
     </style>
+    
 </head>
 <body data-lang="zh">
     <div class="site-shell">
@@ -1177,51 +1318,75 @@
 
             <section id="about" class="section">
                 <nav class="section-nav" aria-label="About navigation">
-                    <a class="site-name" href="#home">Wanyu LIN</a>
-                    <div class="section-nav-links">
-                        <a href="#about">关于我</a>
-                        <a href="#projects">项目经历</a>
-                        <a href="#materials">可视化成果</a>
-                        <a href="#contact">联系我</a>
-                    </div>
-                </nav>
-                <div class="about-layout reveal">
-                    <div class="about-visual">
-                        <div class="portrait-placeholder">
-                            photo coming soon
-                        </div>
-                        <p class="about-note">
-                            When I'm not calculating,<br>
-                            you'll probably find me...<br>
-                            #ExploringPossibilities<br>
-                            #LearningByDoing<br>
-                            #LivingThroughExperience
-                        </p>
-                    </div>
-                    <div class="about-copy">
-                        <p>
-                            你好，我是林婉钰 / Annie / Auniy，来自成都。目前就读于 宁波诺丁汉大学 数学与应用数学专业 大三。
-                        </p>
-                        <p>
-                            不只学数学的数学人，希望体验更多路径的未来。
-                        </p>
-                        <p>
-                            你可以通过此网站了解我的信息经历，欢迎～
-                        </p>
-                    </div>
-                </div>
+    <a class="site-name" href="#home">Wanyu LIN</a>
+    <div class="section-nav-links">
+        <a href="#about">关于我</a>
+        <a href="#projects">项目经历</a>
+        <a href="#materials">可视化成果</a>
+        <a href="#contact">联系我</a>
+    </div>
+    <!-- 菜单栏下方独立语言切换行 -->
+    <div class="lang-switch-wrap">
+        <span class="lang-option zh-btn">中</span>
+        <span class="lang-divider"> / </span>
+        <span class="lang-option en-btn">EN</span>
+    </div>
+</nav>
+                <div class="about-layout">
+    <!-- 头像容器：无延迟优先显示 -->
+    <div class="about-visual visual-img-wrap reveal-img">
+        <div class="portrait-placeholder">
+            <img src="assets/images/face-cutout.png" alt="个人照片">
+        </div>
+        <!-- 逐行动画文字容器 -->
+        <p class="about-note note-lines">
+            <span class="note-line">When I'm not doing math,</span>
+            <span class="note-line">you'll probably find me...</span>
+            <span class="note-line">#NonLinearPath</span>
+            <span class="note-line">#StochasticJourney</span>
+            <span class="note-line">#LifeInBeta</span>
+        </p>
+    </div>
+    <!-- 右侧文字 延迟后整体出现 -->
+    <div class="about-copy reveal-text">
+        <p>
+            你好，我是林婉钰 / Annie / Auniy，来自成都。<br>
+        目前就读于宁波诺丁汉大学数学与应用数学专业，预计2028年毕业。
+        </p>
+        <p>
+            有数学的严谨热情，也是一个不止于数学的多方面爱好者，<br>
+            希望体验更多路径的未来。
+        </p>
+        <p>
+            你可以通过此网站了解我的信息经历，很高兴你来，<br>
+
+            欢迎交流 (*^o^*)~
+        </p>
+        <p class="resume-link-group">
+    查看：
+    <a href="cv-cn.pdf" target="_blank">简历(中文)</a> / 
+    <a href="cv-en.pdf" target="_blank">CV(EN)</a>
+</p>
+    </div>
+</div>
             </section>
 
             <section id="projects" class="section">
-                <nav class="section-nav" aria-label="Projects navigation">
-                    <a class="site-name" href="#home">Wanyu LIN</a>
-                    <div class="section-nav-links">
-                        <a href="#about">关于我</a>
-                        <a href="#projects">项目经历</a>
-                        <a href="#materials">可视化成果</a>
-                        <a href="#contact">联系我</a>
-                    </div>
-                </nav>
+                <nav class="section-nav" aria-label="About navigation">
+    <a class="site-name" href="#home">Wanyu LIN</a>
+    <div class="section-nav-links">
+        <a href="#about">关于我</a>
+        <a href="#projects">项目经历</a>
+        <a href="#materials">可视化成果</a>
+        <a href="#contact">联系我</a>
+    </div>
+    <!-- 菜单栏下方独立语言切换行 -->
+    <div class="lang-switch-wrap">
+        <span class="lang-option zh-btn">中</span>
+        <span class="lang-divider"> / </span>
+        <span class="lang-option en-btn">EN</span>
+    </div>
+</nav>
                 <div class="section-heading reveal">
                     <div>
                         <span class="eyebrow">
@@ -1351,15 +1516,21 @@
             </section>
 
             <section id="materials" class="section">
-                <nav class="section-nav" aria-label="Materials navigation">
-                    <a class="site-name" href="#home">Wanyu LIN</a>
-                    <div class="section-nav-links">
-                        <a href="#about">关于我</a>
-                        <a href="#projects">项目经历</a>
-                        <a href="#materials">可视化成果</a>
-                        <a href="#contact">联系我</a>
-                    </div>
-                </nav>
+                <nav class="section-nav" aria-label="About navigation">
+    <a class="site-name" href="#home">Wanyu LIN</a>
+    <div class="section-nav-links">
+        <a href="#about">关于我</a>
+        <a href="#projects">项目经历</a>
+        <a href="#materials">可视化成果</a>
+        <a href="#contact">联系我</a>
+    </div>
+    <!-- 菜单栏下方独立语言切换行 -->
+    <div class="lang-switch-wrap">
+        <span class="lang-option zh-btn">中</span>
+        <span class="lang-divider"> / </span>
+        <span class="lang-option en-btn">EN</span>
+    </div>
+</nav>
                 <div class="section-heading reveal">
                     <div>
                         <span class="eyebrow">
@@ -1429,15 +1600,30 @@
             </section>
 
             <section id="contact" class="section">
-                <nav class="section-nav" aria-label="Contact navigation">
-                    <a class="site-name" href="#home">Wanyu LIN</a>
-                    <div class="section-nav-links">
-                        <a href="#about">关于我</a>
-                        <a href="#projects">项目经历</a>
-                        <a href="#materials">可视化成果</a>
-                        <a href="#contact">联系我</a>
-                    </div>
-                </nav>
+                <nav class="section-nav" aria-label="About navigation">
+    <a class="site-name" href="#home">Wanyu LIN</a>
+    <nav class="section-nav" aria-label="About navigation">
+    <a class="site-name" href="#home">Wanyu LIN</a>
+    <div class="section-nav-links">
+        <a href="#about">关于我</a>
+        <a href="#projects">项目经历</a>
+        <a href="#materials">可视化成果</a>
+        <a href="#contact">联系我</a>
+    </div>
+    <!-- 菜单栏下方独立语言切换行 -->
+    <div class="lang-switch-wrap">
+        <span class="lang-option zh-btn">中</span>
+        <span class="lang-divider"> / </span>
+        <span class="lang-option en-btn">EN</span>
+    </div>
+</nav>
+    <!-- 菜单栏下方独立语言切换行 -->
+    <div class="lang-switch-wrap">
+        <span class="lang-option zh-btn">中</span>
+        <span class="lang-divider"> / </span>
+        <span class="lang-option en-btn">EN</span>
+    </div>
+</nav>
                 <div class="contact-band reveal">
                     <div>
                         <span class="eyebrow">
@@ -1467,33 +1653,46 @@
     </div>
 
     <script>
-        const body = document.body;
-        const langToggle = document.querySelector(".lang-toggle");
-        const revealItems = document.querySelectorAll(".reveal");
+    const body = document.body;
+// 获取语言切换文字
+const zhBtn = document.querySelector(".zh-btn");
+const enBtn = document.querySelector(".en-btn");
+const revealItems = document.querySelectorAll(".reveal-img, .reveal-text");
 
-        function setLanguage(lang) {
-            body.dataset.lang = lang;
-            document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
-            localStorage.setItem("siteLanguage", lang);
+// 切换语言核心函数（完全复用你原有逻辑，和简历双语逻辑统一）
+function setLanguage(lang) {
+    body.dataset.lang = lang;
+    document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+    localStorage.setItem("siteLanguage", lang);
+}
+
+// 读取本地存储语言，页面初始化自动加载上次选择
+const savedLang = localStorage.getItem("siteLanguage") || "zh";
+setLanguage(savedLang);
+
+// 点击「中」切换中文全站
+if (zhBtn) {
+    zhBtn.addEventListener("click", () => {
+        setLanguage("zh");
+    });
+}
+// 点击「EN」切换英文全站
+if (enBtn) {
+    enBtn.addEventListener("click", () => {
+        setLanguage("en");
+    });
+}
+
+// 页面滚动动画监听（保留你所有头像、分段文字动画逻辑，无改动）
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
         }
+    });
+}, { threshold: 0.16 });
 
-        if (langToggle) {
-            langToggle.addEventListener("click", () => {
-                setLanguage(body.dataset.lang === "zh" ? "en" : "zh");
-            });
-        }
-
-        setLanguage(localStorage.getItem("siteLanguage") || "zh");
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                }
-            });
-        }, { threshold: 0.16 });
-
-        revealItems.forEach((item) => observer.observe(item));
+revealItems.forEach((item) => observer.observe(item));
     </script>
 </body>
 </html>
