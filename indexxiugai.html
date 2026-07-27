@@ -182,9 +182,16 @@ main {
             transition: transform 0.2s ease;
         }
 
-        .section-nav-links a:hover {
-            color: var(--cobalt);
-        }
+        .section-nav-links a:hover,
+.section-nav-links a.active {
+    color: var(--cobalt);
+}
+
+.section-nav-links a:hover::after,
+.section-nav-links a.active::after {
+    background: var(--lemon);
+    transform: scaleX(1);
+}
 
         .section-nav-links a:hover::after {
             transform: scaleX(1);
@@ -283,11 +290,11 @@ main {
             right: clamp(22px, 5vw, 72px);
             bottom: clamp(22px, 5vw, 54px);
             z-index: 3;
-            border: 2px solid rgba(224, 31, 38, 0.28);
+            border: 2px solid #1D4B6C;
             border-radius: 999px;
             padding: 11px 16px;
-            color: var(--hello-red);
-            font-size: 18px;
+            color: #8688BC;
+            font-size: 18.5px;
             font-weight: 820;
             letter-spacing: 0.08em;
             opacity: 0;
@@ -315,7 +322,7 @@ main {
             align-items: center;
             gap: 10px;
             color: var(--cobalt);
-            font-size: 12px;
+            font-size: 18px !important; /* 强行命令浏览器必须听我的 */
             font-weight: 500;
             letter-spacing: 0.15em;
             text-transform: uppercase;
@@ -430,14 +437,22 @@ main {
 
         .section-heading h2 {
             max-width: 760px;
-            margin-top: 12px;
+            margin-top: 6px;
             color: var(--midnight);
-            font-family: Unbounded, Inter, sans-serif;
+            font-family: "Montserrat", sans-serif ;
             font-size: clamp(34px, 5vw, 64px);
             font-weight: 700;
             line-height: 1.02;
         }
-
+        .section-heading h2 {
+            font-size: clamp(42px, 5vw, 76px);
+    font-family: "Montserrat", sans-serif ;
+    font-weight: bold;
+    letter-spacing: 0.12em;
+    margin-top: -70px;
+    margin-bottom: 30px;
+    color: #1D4B6C;
+}
         .section-heading p {
             color: rgba(13, 30, 61, 0.7);
             font-size: 15px;
@@ -638,9 +653,9 @@ main {
         }
 
         .contact-band h2 {
-            font-family: Unbounded, Inter, sans-serif;
+            font-family: "Montserrat", sans-serif ;
             font-size: clamp(34px, 5vw, 58px);
-            font-weight: 700;
+            font-weight: 200;
             line-height: 1.05;
         }
 
@@ -773,7 +788,7 @@ main {
         .eyebrow {
             color: rgba(13, 30, 61, 0.58);
             font-family: "Courier Prime", "Source Han Sans SC", "Noto Sans SC", monospace;
-            font-size: 13px;
+            font-size: 18px;
             font-weight: 400;
             letter-spacing: 0.18em;
             line-height: 1.9;
@@ -790,7 +805,7 @@ main {
         .doc-card h3,
         .timeline-item h3 {
             color: var(--midnight);
-            font-family: "Courier Prime", "Source Han Sans SC", "Noto Sans SC", monospace;
+            font-family: "Montserrat", sans-serif ;
             font-weight: 700;
             letter-spacing: 0.12em;
         }
@@ -937,13 +952,13 @@ main {
         }
 
         .contact-links {
-            gap: 22px;
+            gap: 0;
         }
 
         .contact-links a {
             padding: 0;
             color: rgba(13, 30, 61, 0.72);
-            font-family: "Courier Prime", "Source Han Sans SC", "Noto Sans SC", monospace;
+            font-family: "Montserrat", sans-serif;
             font-size: 14px;
             font-weight: 400;
             letter-spacing: 0.07em;
@@ -988,7 +1003,7 @@ main {
 }
 /* 选中about布局第一栏（照片容器） */
 .about-layout > div:first-child {
-    margin-top: -20px;    /* 往下，数字越大越靠下 */
+    margin-top: -50px;    /* 往下，数字越大越靠下 */
     margin-left: -10px;  /* 往左，负数越小越靠左 */
 }
 /* 容器跟随图片原生尺寸，不强制固定宽高 */
@@ -1307,12 +1322,12 @@ html, body {
 
 main {
     height: 100vh !important;
-    overflow-y: scroll !important; /* 允许 main 在内部悄悄滚动切换 */
-    scroll-behavior: smooth !important; /* 让点击导航栏跳转时，有丝滑的滚动动画 */
-    
-    /* 👻 核心：强行隐藏 main 的滚动条（各大浏览器兼容写法） */
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+
+    /* 禁止通过鼠标滚轮/触控板滚动切换页面 */
+    overflow-y: hidden !important;
+
+    /* 点击 continue 后仍然平滑切换 */
+    scroll-behavior: smooth !important;
 }
 main::-webkit-scrollbar {
     display: none; /* Chrome, Safari and Opera */
@@ -1339,7 +1354,7 @@ section, .section {
 }
 /* 🎯 强行让右侧文段独立向上平移 */
 .about-layout > div:last-child {
-    margin-top: -20px !important; /* 👈 负数！数值越大（比如 -50px, -60px），文字就往上提得越高 */
+    margin-top: -80px !important; /* 👈 负数！数值越大（比如 -50px, -60px），文字就往上提得越高 */
 }
 /* 🎯 专门把左边的图片盒子往右推 */
 .about-visual {
@@ -1351,13 +1366,817 @@ section, .section {
     text-transform: uppercase;     /* 顺便确保英文大写（通常小标题大写更有质感） */
     font-weight: 600;              /* 如果觉得字太细，可以加粗到 600 */
 }
-/* 🎯 让整个板块标题区域整体向上平移 */
-.section-heading {
-    margin-top: -50px !important; /* 👈 负数！数值越大（如 -60px, -80px），整个区域往上提得越高 */
+/* ==========================================================================
+   🔒 终极隔离方案：About 维持标准一屏，内部物理防漏封条
+   ========================================================================== */
+
+/* 1. 强行把整个 About 限制在标准的一屏高，不给大框架惹事 */
+#about.section {
+    height: 100vh !important;
+    position: relative !important;
+    overflow: hidden !important; /* 🧱 外部绝对不允许滚出下一页 */
 }
-    </style>
+
+/* 2. 🎛️ 核心物理封条：这是我们刚刚加的代码外壳。
+   它在内部自己滚动，当滑到 Skills 底部时，滚动条自然到头卡死，绝对漏不出后面的Experience！ */
+.about-scroll-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto !important; /* 允许在 About 这一个页面里上下滑动 */
+    overflow-x: hidden;
+    padding-top: 80px; /* 留出顶部导航菜单的避让空间 */
+    scroll-behavior: smooth;
+    
+    /* 隐藏系统自带的丑陋滚动条 */
+    scrollbar-width: none; 
+}
+.about-scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
+.about-scroll-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+
+    /* 技能云滚动到底后，不把滚动传递给外层页面 */
+    overscroll-behavior-y: contain;
+
+    padding-top: 80px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+/* 3. 技能区域排版 */
+.skills-section {
+    margin-top: 100px;
+    padding: 40px 20px 200px 20px; /* 👈 200px 的底部超大留白，确保滑到技能云底部直接撞墙死锁 */
+    text-align: center;
+}
+
+.skills-title {
+    font-size: clamp(42px, 5vw, 76px);
+    font-family: "Montserrat", sans-serif ;
+    font-weight: bold;
+    letter-spacing: 0.12em;
+    margin-top: -70px;
+    margin-bottom: 30px;
+    color: #1D4B6C;
+}
+
+/* 技能云容器 */
+.skills-cloud {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    height: 480px;
+    margin: 0 auto;
+}
+
+/* 小词条标签基础样式 */
+.skill-tag {
+    position: absolute;
+    padding: 12px 26px;
+    background: #c0dee03a;
+    border-radius: 999px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.04);
+    font-family: "Montserrat", sans-serif !important;
+    font-size: 16px;
+    font-weight: 540;
+    color: #000000;
+    cursor: pointer;
+    border: 1px solid #c0dee0;
+    transition:
+    opacity 0.35s ease,
+    filter 0.35s ease,
+    transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 0.35s ease;
+}
+
+.skill-tag:hover {
+    transform: scale(1.06);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+    z-index: 100;
+}
+
+/* 🔮 鼠标悬浮时弹出的独立磨砂小卡片 */
+.skill-tooltip {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.94);
+
+    /* 横向长方形 */
+    width: min(86vw, 860px);
+    max-width: 860px;
+    min-height: 360px;
+    padding: 34px;
+
+    display: grid;
+    grid-template-columns: minmax(260px, 0.9fr) minmax(320px, 1.3fr);
+    align-items: center;
+    gap: 36px;
+
+    /* background: #CDD4E1; */
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 24px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.14);
+
+    text-align: left;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease,
+        transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+    z-index: 9999;
+}
+
+.skill-tooltip h3 {
+    margin-bottom: 15px;
+    color: #555;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.35;
+}
+
+.skill-tooltip p {
+    margin: 0;
+    color: #555;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+/* 右侧文件预览区域 */
+.skill-preview {
+    width: 100%;
+    height: 290px;
+    overflow: hidden;
+    background: #f5f4ef;
+    border-radius: 16px;
+}
+
+/* PDF */
+.skill-preview iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* 照片 */
+.skill-preview img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ==================================================
+   技能卡片三图轮播
+   ================================================== */
+
+.skill-carousel {
+    width: 100%;
+    min-width: 0;
+}
+
+.carousel-image-wrap {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background: #f2f1ec;
+    border-radius: 16px;
+}
+
+/* 默认隐藏所有图片 */
+.carousel-image {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(18px);
+    transition:
+        opacity 0.4s ease,
+        visibility 0.4s ease,
+        transform 0.4s ease;
+}
+.carousel-image {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(18px);
+    transition:
+        opacity 0.4s ease,
+        visibility 0.4s ease,
+        transform 0.4s ease;
+}
+
+/* 仅第三张图片保持原始比例 */
+img.carousel-image.original-ratio {
+    object-fit: contain;
+    object-position: center;
+}
+
+/* 当前显示的图片 */
+.carousel-image.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+
+/* 左右箭头 */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #111;
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+.carousel-arrow:hover {
+    background: #ffffff;
+    transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-prev {
+    left: 14px;
+}
+
+.carousel-next {
+    right: 14px;
+}
+
+/* 图片下方字幕 */
+.carousel-caption {
+    min-height: 24px;
+    margin: 14px 8px 0 !important;
+
+    color: rgba(13, 30, 61, 0.7) !important;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    text-align: center;
+
+    transition: opacity 0.25s ease;
+}
+
+/* 下方页码圆点 */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 10px;
+}
+
+.carousel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(13, 30, 61, 0.2);
+    transition:
+        width 0.25s ease,
+        background 0.25s ease;
+}
+
+.carousel-dot.active {
+    width: 18px;
+    border-radius: 999px;
+    background: var(--cobalt);
+}
+
+@media (max-width: 700px) {
+    .carousel-image-wrap {
+        height: 220px;
+    }
+
+    .carousel-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+}
+
+/* 鼠标悬停时显示 */
+.skill-tag:hover .skill-tooltip {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* 手机端改成上下排列 */
+@media (max-width: 700px) {
+    .skill-tooltip {
+        width: 90vw;
+        max-height: 82vh;
+        overflow-y: auto;
+        grid-template-columns: 1fr;
+        gap: 22px;
+        padding: 26px;
+    }
+
+    .skill-preview {
+        height: 230px;
+    }
+}
+
+.skill-tooltip h3 {
+    font-size: 24px;
+    color: #111;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+.skill-tooltip p {
+    margin: 0;
+    color: #555555;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+}
+/* Media板块：严格保持左文字、右图片 */
+.media-tooltip {
+    grid-template-columns: minmax(280px, 0.9fr) minmax(360px, 1.25fr);
+    align-items: center;
+}
+
+.media-tooltip .skill-tooltip-text {
+    grid-column: 1;
+    min-width: 0;
+    text-align: left;
+}
+
+.media-tooltip .skill-carousel {
+    grid-column: 2;
+    min-width: 0;
+}
+
+.media-tooltip .skill-tooltip-text p + p {
+    margin-top: 16px;
+}
+
+.media-tooltip .skill-intro {
+    color: #222;
+    font-weight: 600;
+}
+.skill-tag:hover .skill-tooltip {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* 只有真正悬停某个技能词条时，其他词条才模糊 */
+.skills-cloud:has(.skill-tag:hover) .skill-tag:not(:hover) {
+    opacity: 0.28;
+    filter: blur(2px);
+    transform: scale(0.98);
+}
+
+/* 4. 📌 钉死 continue 按钮：牢牢吸在这一屏的右下角，不管里面怎么滑，它都纹丝不动 */
+#about.section > .hello-scroll {
+    position: absolute !important; 
+    right: clamp(22px, 5vw, 72px) !important;
+    bottom: 40px !important; 
+    top: auto !important;
+    z-index: 999 !important;
+}
+/* English Application Ability 固定显示两行 */
+.english-skill-tag {
+    width: max-content;
+    max-width: none;
+    white-space: nowrap;
+    text-align: center;
+    line-height: 1.5;
+}/* 纯文字技能悬浮窗：取消两栏，缩小窗口 */
+.skill-tooltip.text-only-tooltip {
+    width: min(88vw, 560px);
+    max-width: 560px;
+    min-height: 0;
+
+    display: block;
+    padding: 42px 46px;
+
+    text-align: left;
+}
+
+/* 纯文字悬浮窗标题 */
+.text-only-tooltip h3 {
+    margin-bottom: 18px;
+    font-size: 25px;
+    line-height: 1.35;
+}
+
+/* 纯文字悬浮窗正文 */
+.text-only-tooltip p {
+    margin: 0;
+    max-width: none;
+
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+}
+@media (max-width: 700px) {
+    .finance-tooltip {
+        width: 92vw;
+        height: 84vh;
+        min-height: 0;
+        overflow-y: auto;
+
+        grid-template-columns: 1fr;
+        gap: 26px;
+        padding: 25px;
+    }
+
+    .finance-tooltip .pdf-tabs {
+        grid-template-columns: 1fr;
+    }
+
+    .finance-tooltip .pdf-viewer {
+        min-height: 420px;
+    }
+
+    .finance-tooltip .pdf-viewer-frame {
+        min-height: 420px;
+    }
+}
+/* ==================================================
+   Portfolio Management PDF 悬浮窗口
+   ================================================== */
+
+/* 外部词条避免自动拆成很多行 */
+.finance-skill-tag {
+    width: max-content;
+    max-width: 300px;
+    text-align: center;
+    line-height: 1.45;
+}
+
+/* 整个展开窗口 */
+.finance-tooltip {
+    width: min(92vw, 1100px);
+    max-width: 1100px;
+    height: min(78vh, 650px);
+    min-height: 520px;
+
+    grid-template-columns:
+        minmax(300px, 0.85fr)
+        minmax(460px, 1.35fr);
+
+    align-items: stretch;
+    gap: 44px;
+    padding: 38px;
+}
+
+/* 左侧文字 */
+.finance-tooltip .skill-tooltip-text {
+    min-width: 0;
+    align-self: center;
+    text-align: left;
+}
+
+.finance-tooltip .skill-tooltip-text p + p {
+    margin-top: 18px;
+}
+
+.finance-tooltip .skill-intro {
+    color: #222;
+    font-weight: 600;
+}
+
+/* 右侧PDF区域 */
+.finance-tooltip .pdf-switcher {
+    min-width: 0;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* 三个PDF横向选择按钮 */
+.finance-tooltip .pdf-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.finance-tooltip .pdf-tab {
+    min-width: 0;
+    padding: 11px 10px;
+
+    border: 1px solid rgba(13, 30, 61, 0.12);
+    border-radius: 999px;
+
+    color: rgba(13, 30, 61, 0.65);
+    background: rgba(13, 30, 61, 0.04);
+
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+
+    cursor: pointer;
+    transition:
+        color 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.finance-tooltip .pdf-tab:hover {
+    color: var(--cobalt);
+    background: rgba(27, 63, 139, 0.08);
+}
+
+/* 当前选择的PDF按钮 */
+.finance-tooltip .pdf-tab.active {
+    color: #ffffff;
+    background: var(--cobalt);
+    border-color: var(--cobalt);
+}
+
+/* PDF预览外框 */
+.finance-tooltip .pdf-viewer {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+
+    background: #eeeeea;
+    border: 1px solid rgba(13, 30, 61, 0.1);
+    border-radius: 14px;
+}
+
+/* PDF本身，可以在里面竖向滚动 */
+.finance-tooltip .pdf-viewer-frame {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 430px;
+    border: 0;
+    background: #ffffff;
+}
+
+/* 底部操作提示 */
+.finance-tooltip .pdf-viewer-hint {
+    margin-top: 9px !important;
+    color: rgba(13, 30, 61, 0.42) !important;
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    text-align: center;
+}
+
+.section-nav-links a:hover,
+.section-nav-links a.active {
+    color: #D5534A !important;
+}
+
+.section-nav-links a:hover::after,
+.section-nav-links a.active::after {
+    background-color: #D5534A !important;
+    transform: scaleX(1) !important;
+}
+/* About介绍与Skills之间的向下引导键 */
+.skills-guide {
+    width: max-content;
+    margin: -40px auto 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    color: rgba(13, 30, 61, 0.55);
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+
+    cursor: pointer;
+    transition: color 0.25s ease;
+}
+
+.skills-guide:hover {
+    color: #D5534A;
+}
+
+.skills-guide-arrow {
+    font-size: 25px;
+    line-height: 1;
+    animation: skillsGuideBounce 1.6s ease-in-out infinite;
+}
+
+@keyframes skillsGuideBounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(8px);
+    }
+}
+footer {
+    position: fixed;
+    bottom: 20px; /* 距离底部 20 像素 */
+    left: 50%;
+    transform: translateX(-50%); /* 居中对齐 */
+    color: rgba(255, 255, 255, 0.5); /* 淡淡的白字 */
+    font-size: 12px;
+    z-index: 999; /* 确保它在最上层，不被盖住 */
+}
+
+/* 全站底部版权信息 */
+.site-footer {
+    position: fixed;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+
+    width: max-content;
+    max-width: calc(100vw - 40px);
+
+    color: rgba(13, 30, 61, 0.55);
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    text-align: center;
+    white-space: nowrap;
+
+    pointer-events: none;
+    z-index: 99999;
+}
+
+/* ==================================================
+   Contact 页面最终布局
+   ================================================== */
+
+/* 整个联系方式区域放到页面下方 */
+#contact .contact-band {
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: 90px;
+    padding: 0 50px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.55fr);
+    column-gap: clamp(60px, 10vw, 150px);
+
+    /* 左右内容底部严格对齐 */
+    align-items: end;
+
+    color: var(--midnight);
+}
+
+/* 清除左侧容器的额外位移 */
+#contact .contact-band > div:first-child {
+    margin: 0;
+    padding: 0;
+}
+
+/* Contact标题 */
+#contact .contact-band h2 {
+    margin: 0 0 15px;
+    padding: 0;
+
+    color: var(--midnight);
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(34px, 5vw, 58px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.05em;
+}
+
+/* 左侧介绍段落 */
+#contact .contact-band p {
+    margin: 0;
+    padding: 0;
+    color: rgba(13, 30, 61, 0.75);
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.8;
+    letter-spacing: 0.055em;
+}
+
+/* 右侧三行联系方式 */
+#contact .contact-links {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    display: grid;
+    gap: 0;
+
+    align-self: end;
+    justify-self: end;
+    text-align: left;
+
+    /* 删除之前的向下位移 */
+    transform: none;
+}
+
+/* 右侧字体与左侧段落完全一致 */
+#contact .contact-links a {
+    margin: 0;
+    padding: 0;
+
+    color: rgba(13, 30, 61, 0.75);
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.8;
+    letter-spacing: 0.055em;
+
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+}
+
+/* 悬停效果 */
+#contact .contact-links a:hover {
+    color: #D5534A;
+    text-decoration-color: #F2C315;
+    transform: none;
+}
+
+/* 手机端 */
+@media (max-width: 900px) {
+    #contact .contact-band {
+        margin-top: auto;
+        margin-bottom: 70px;
+        padding: 0 24px;
+
+        grid-template-columns: 1fr;
+        row-gap: 34px;
+    }
+
+    #contact .contact-links {
+        justify-self: start;
+    }
+
+    #contact .contact-band p,
+    #contact .contact-links a {
+        font-size: 16px;
+    }
+}
+/* Contact页所有主要内容整体向下移动 */
+#contact .contact-band {
+    transform: translateY(90px) !important;
+}
+ </style>
     
 </head>
+<meta charset="UTF-8">
+    <title>我的个人主页</title>
+    
+    <!-- 1. 引入谷歌字体服务 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- 2. 将这里的链接换成了 Montserrat （包含了从 100 到 900 的全部字重） -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <!-- 你自己的 style.css -->
+    <link rel="stylesheet" href="style.css">
 <body data-lang="zh">
     <div class="site-shell">
         <div class="grain" aria-hidden="true"></div>
@@ -1378,106 +2197,610 @@ section, .section {
                 </div>
             </section>
 
-                <section id="about" class="section">
+            <!-- ✂️ 找到原代码中的 <section id="about" ...> 一直到 </section>，全部删掉，替换为以下内容： -->
+            <section id="about" class="section">
                 <nav class="section-nav" aria-label="About navigation">
-    <a class="site-name" href="#home">Wanyu LIN</a>
-    <div class="section-nav-links">
-        <a href="#about">关于我</a>
-        <a href="#projects">项目经历</a>
-        <a href="#materials">可视化成果</a>
-        <a href="#contact">联系我</a>
-    </div>
-    <!-- 菜单栏下方独立语言切换行 -->
-    <div class="lang-switch-wrap">
-        <span class="lang-option zh-btn">中</span>
-        <span class="lang-divider"> / </span>
-        <span class="lang-option en-btn">EN</span>
-    </div>
-</nav>
-                <div class="about-layout">
-    <!-- 头像容器：无延迟优先显示 -->
-    <div class="about-visual visual-img-wrap reveal-img">
-        <div class="portrait-placeholder">
-            <img src="assets/images/face-cutout.png" alt="个人照片">
+                    <a class="site-name" href="#home">Wanyu LIN</a>
+                    <div class="section-nav-links">
+                        <a href="#about">About</a>
+                        <a href="#experience">Experience</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </nav>
+
+                <!-- 🎯 ✨ 新增核心：一堵物理墙（about-scroll-wrapper）。
+                     它把里面所有的自我介绍和技能云牢牢锁在里面自己滚动，绝对不撑大外面的全屏大框架！ -->
+                <div class="about-scroll-wrapper">
+                    
+                    <!-- 1. 保留你原封不动的自我介绍与头像排版 -->
+                    <div class="about-layout">
+                        <div class="about-visual visual-img-wrap reveal-img">
+                            <div class="portrait-placeholder">
+                                <img src="assets/images/face-cutout.png" alt="个人照片">
+                            </div>
+                            <p class="about-note note-lines">
+                                <span class="note-line">When I'm not doing math,</span>
+                                <span class="note-line">you'll probably find me...</span>
+                                <span class="note-line">#NonLinearPath</span>
+                                <span class="note-line">#StochasticJourney</span>
+                                <span class="note-line">#LifeInBeta</span>
+                            </p>
+                        </div>
+                        <div class="about-copy reveal-text">
+                            <p style="font-family: Montserrat, sans-serif; font-size: 1rem; line-height: 1.8; ">
+                                Hello, I am <b> Wanyu LIN</b> / <b>Annie</b> / <b>Auniy</b>, from Chengdu.<br>
+                                Currently studying <b>Mathematics and Applied Mathematics</b> at the <b>University of Nottingham Ningbo China</b>, expected to graduate in 2028.<br>
+                                Possessing a rigorous passion for math, I am also a multi-faceted enthusiast whose interests extend far beyond the subject.
+                                I look forward to <b>exploring diverse possibilities</b> and <b>paths for my future</b>.
+                            </p>
+                           <p style="font-family: Montserrat, sans-serif; font-size: 1rem; line-height: 1.8; ">
+                                You can learn more about my profile and experience through this website.
+                                I hope you enjoy exploring it and discovering more about me and my work.
+                            </p>
+                            <p style="line-height: 1.6; max-width: 90%; width: 100%; margin-bottom: 5px;">
+                                <span style="letter-spacing: -1px;"><b>Skills</b>:</span> 
+                                <span style="font-family: Montserrat, sans-serif; font-size: 1rem; ">Python, R, Stata, SPSS, MatLab, SQL, HTML, LaTeX, Excel...</span>
+                            </p>
+                            <p style="line-height: 1.6; max-width: 90%; width: 100%; margin-top: 0;">
+                                <span style="letter-spacing: -1px;"><b>Interests</b>:</span> 
+                                <span style="font-family: Montserrat, sans-serif; font-size: 1rem; ">Mathematical Modeling, Financial Analysis (quant), Research.</span>
+                            </p>
+                            <p class="resume-link-group">
+                                <b>View my resume</b>:
+                                <a href="cv-cn.pdf" target="_blank">简历(中文)</a> / 
+                                <a href="cv-en.pdf" target="_blank">CV(EN)</a>
+                            </p>
+                        </div>
+                    </div> <!-- about-layout 结束 -->
+
+<!-- 引导用户继续向下浏览技能 -->
+<a class="skills-guide" href="#skills">
+    <span>SCROLL DOWN TO EXPLORE MY SKILLS</span>
+    <span class="skills-guide-arrow">↓</span>
+</a>
+
+<!-- SKILLS 技能云板块 -->
+<div id="skills" class="skills-section">
+                        <h2 class="skills-title">SKILLS</h2>
+                        
+                        <div class="skills-cloud">
+                            <!-- 词条 1 -->
+<div class="skill-tag" style="top: 15%; left: 42%;">
+    Prompt Engineering
+
+    <div class="skill-tooltip text-only-tooltip">
+        <div class="skill-tooltip-text">
+            <h3>Prompt Engineering</h3>
+
+            <p>
+                Proficient in advanced prompt engineering techniques to precisely guide 
+                Large Language Models (LLMs) in generating structured data and 
+                high-quality code.
+            </p>
         </div>
-        <!-- 逐行动画文字容器 -->
-        <p class="about-note note-lines">
-            <span class="note-line">When I'm not doing math,</span>
-            <span class="note-line">you'll probably find me...</span>
-            <span class="note-line">#NonLinearPath</span>
-            <span class="note-line">#StochasticJourney</span>
-            <span class="note-line">#LifeInBeta</span>
-        </p>
-    </div>
-    <!-- 右侧文字 延迟后整体出现 -->
-    <div class="about-copy reveal-text">
-        <p style="font-family: Arial, sans-serif; font-size: 1rem; line-height: 1.6; word-spacing: -0.5px;  ">
-            Hello, I am Wanyu LIN / Annie / Auniy, from Chengdu.<br>
-            Currently studying Mathematics and Applied Mathematics at the University of Nottingham Ningbo China, expected to graduate in 2028.
-            Possessing a rigorous passion for math, I am also a multi-faceted enthusiast whose interests extend far beyond the subject.  I look forward to exploring diverse possibilities and paths for my future.
-        </p>
-        <p style="font-family: Arial, sans-serif; font-size: 1rem; line-height: 1.6; word-spacing: -0.5px; ">
-
-            You can learn more about my profile and experience through this website.
-            I hope you enjoy exploring it and discovering more about me and my work.
-        </p>
-        <!-- 这样写不仅语法 100% 正确，而且看起来像简历一样精致 -->
-<p style="line-height: 1.6; max-width: 70%; width: 100%; margin-bottom: 5px;">
-    <!-- 🎯 只有 Skills: 里的字母会向内挤压 1 像素，看起来更扎实、更稳重 -->
-    <span style="letter-spacing: -1px;">Skills:</span> 
-    <span style="font-family: Arial, sans-serif; font-size: 1rem; word-spacing: -0.5px;">Python, R, Stata, SPSS, MatLab, SQL, HTML, LaTeX, Excel...</span>
-</p>
-
-<p style="line-height: 1.6; max-width: 70%; width: 100%; margin-top: 0;">
-    <!-- 🎯 Interests: 同步缩紧字母间距 -->
-    <span style="letter-spacing: -1px;">Interests:</span> 
-    <span style="font-family: Arial, sans-serif; font-size: 1rem; word-spacing: -0.5px;">Mathematical Modeling, Financial Analysis (quant), Research.</span>
-</p>
-      
-        <p class="resume-link-group">
-    View my resume:
-    <a href="cv-cn.pdf" target="_blank">简历(中文)</a> / 
-    <a href="cv-en.pdf" target="_blank">CV(EN)</a>
-</p>
     </div>
 </div>
-                <!-- 新增和首页同款右下角continue按钮 -->
-                <a class="hello-scroll" href="#projects">
+                            <!-- 词条 2 -->
+                            <div class="skill-tag" style="top: 2.5%; left: 18%;">
+    Core Mathematics (GPA 4.0)
+    <!-- 🎯 专属类名修饰符更新为 tooltip-math-en -->
+    <div class="skill-tooltip tooltip-math-en"> 
+        <div>
+            <h3>Core Mathematics & Analytical Foundations</h3>
+            <p>
+                Completed rigorous coursework in Mathematical <b>Analysis, Linear Algebra, Abstract Algebra, Probability & Mathematical Statistics, Ordinary Differential Equations,</b> and <b>Applied Mathematics</b>. 
+                <br>Equipped with a solid theoretical framework, proficiency in specialized mathematical software, and advanced skills in logical reasoning, abstract deduction, and quantitative analysis, maintaining a core GPA of 4.0/4.0.
+            </p>
+        </div>
+        <!-- 📄 右侧文件预览区：放入你的真实成绩单或相关证书路径 -->
+        <div class="skill-preview">
+            <iframe src="assets/docs/transcript.pdf#view=FitH"></iframe>
+        </div>
+    </div>
+</div>
+                            <!-- 词条 3 -->
+                            <div class="skill-tag english-skill-tag" style="top: 30%; right: 12%;">
+    English Application Ability <br> CET-4 / Gaokao 141
+
+    <div class="skill-tooltip">
+        <!-- 左侧文字 -->
+        <div class="skill-tooltip-text">
+            <h3>English Proficiency <br> <span style="font-size: 0.85em; opacity: 0.8;">CET-4: 597 |<br> Gaokao: 141/150</span></h3>
+
+            <p>
+                Demonstrated high language proficiency with a <br><b>CET-4 score of 597</b> and a <b>Gaokao English score of 141/150</b>.
+            </p>
+            <p>
+        Equipped with strong capabilities in <b>business <br>communication</b> and <b>technical documentation <br>text processing</b>, 
+        enabling seamless collaboration <br>in global and multilingual environments.
+    </p>
+        </div>
+
+        <!-- 右侧 PDF 预览 -->
+        <div class="skill-preview">
+            <iframe
+                src="assets/docs/cet4-certificate.pdf#view=FitH"
+                title="CET-4 Certificate">
+            </iframe>
+        </div>
+    </div>
+</div>
+                            <!-- 词条 4 -->
+                            <div class="skill-tag" style="top: 40%; right: 68%;">
+    Web Implementation / Vibe Coding
+
+    <div class="skill-tooltip text-only-tooltip">
+        <div class="skill-tooltip-text">
+            <h3>Web Implementation / Vibe Coding</h3>
+
+            <p>
+                Proficient in modern responsive layouts and AI-assisted development,
+                efficiently transforming creative concepts into smooth,
+                interactive webpages.
+            </p>
+        </div>
+    </div>
+</div>
+                            
+                            <!-- 词条 5 -->
+<!-- Project Leadership & Operations -->
+<div class="skill-tag" style="top: 45%; left: 38%;">
+    Project Leadership
+
+    <div class="skill-tooltip reap-tooltip">
+        <!-- 左侧：所有标题和文字 -->
+        <div class="skill-tooltip-text">
+            <h3>Project Leadership &amp; Operations</h3>
+
+            <p class="skill-intro">
+                Spearheaded the <b>REAP Onsite Teacher Training</b>, a high-profile educational 
+                welfare program empowering rural English teachers across 13 provinces in China.
+            </p>
+
+            <p>
+                Demonstrated comprehensive <b>end-to-end project management</b> and 
+                <b>stakeholder coordination</b> by seamlessly liaising with prominent partners, 
+                including the Jack Ma Foundation, Beijing Normal University, and Match Light Welfare.
+            </p>
+
+            <p>
+                Oversaw multi-dimensional operations spanning <b>bilingual emceeing</b>, 
+                foreign guest reception, cross-cultural campus tours, budget/financial clearance, 
+                and official media coverage.
+            </p>
+        </div>
+
+        <!-- 右侧：三张照片轮播 -->
+        <div class="skill-carousel">
+            <div class="carousel-image-wrap">
+                <button
+                    class="carousel-arrow carousel-prev"
+                    type="button"
+                    aria-label="Previous photo">
+                    &#10094;
+                </button>
+
+                <!-- 照片 1 -->
+                <img
+                    class="carousel-image active"
+                    src="assets/images/activity-1.jpg"
+                    alt="REAP Project Leadership"
+                    data-caption="Onsite Event Photo">
+
+                <!-- 照片 2 -->
+                <img
+                    class="carousel-image"
+                    src="assets/images/activity-2.jpg"
+                    alt="Stakeholder coordination"
+                    data-caption="Onsite Event Photo">
+
+                <!-- 照片 3 -->
+                <img
+                    class="carousel-image original-ratio"
+                    src="assets/images/activity-3.jpg"
+                    alt="Media operations"
+                    data-caption="Onsite Event Photo">
+
+                <button
+                    class="carousel-arrow carousel-next"
+                    type="button"
+                    aria-label="Next photo">
+                    &#10095;
+                </button>
+            </div>
+
+            <!-- 初始字幕，与第一张图的 data-caption 保持一致 -->
+            <p class="carousel-caption">
+                Project Leadership | REAP Onsite Teacher Training Program
+            </p>
+
+            <!-- 三个导航小圆点 -->
+            <div class="carousel-dots" aria-label="Photo position">
+                <span class="carousel-dot active"></span>
+                <span class="carousel-dot"></span>
+                <span class="carousel-dot"></span>
+            </div>
+        </div>
+    </div>
+</div>
+                            <!-- 词条 6 -->
+                            <!-- Media Operations & Public Engagement -->
+<div class="skill-tag" style="top: 68%; left: 20%;">
+    Media Operations &amp;<br> Public Engagement
+
+    <div class="skill-tooltip media-tooltip">
+        <!-- 左侧：所有标题和文字 -->
+        <div class="skill-tooltip-text">
+            <h3>Media Operations &amp; Public Engagement</h3>
+
+            <p class="skill-intro">
+                Adept at connecting people through creative campus media,
+                with hands-on experience in content curation and storytelling.
+            </p>
+
+            <p>
+                Contributed to the <b>official CELE WeChat Official Account</b> by
+                spearheading content creation, copywriting, and editorial
+                management.
+            </p>
+
+            <p>
+                Demonstrated strong public speaking and interpersonal skills
+                through <b>bilingual event emceeing</b> and <b>leading campus tours for</b>
+                high-profile training programs.
+            </p>
+        </div>
+
+        <!-- 右侧：三张照片轮播 -->
+        <div class="skill-carousel">
+            <div class="carousel-image-wrap">
+                <button
+                    class="carousel-arrow carousel-prev"
+                    type="button"
+                    aria-label="Previous photo">
+                    &#10094;
+                </button>
+
+                <img
+                    class="carousel-image active"
+                    src="assets/images/hosting-1.jpg"
+                    alt="Bilingual hosting event"
+                    data-caption="Bilingual Emcee | Opening Ceremony of Zhejiang Wanli Teacher Training Program">
+
+                <img
+                    class="carousel-image"
+                    src="assets/images/hosting-2.jpg"
+                    alt="Campus tour"
+                    data-caption="Lead Campus Tour | 2025 Summer Rural Teacher Training Program">
+
+                <img
+    class="carousel-image original-ratio"
+    src="assets/images/hosting-3.jpg"
+    alt="University media article"
+    data-caption="Article Writing for University Official Media">
+
+                <button
+                    class="carousel-arrow carousel-next"
+                    type="button"
+                    aria-label="Next photo">
+                    &#10095;
+                </button>
+            </div>
+
+            <p class="carousel-caption">
+                Bilingual Emcee | Opening Ceremony of Zhejiang Wanli Teacher Training Program
+            </p>
+
+            <div class="carousel-dots" aria-label="Photo position">
+                <span class="carousel-dot active"></span>
+                <span class="carousel-dot"></span>
+                <span class="carousel-dot"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 词条 7 -->
+<!-- Mathematical & Physiological Modeling -->
+<div class="skill-tag" style="top: 90%; left: 1%;">
+    Mathematical &amp; Physiological Modeling
+
+    <div class="skill-tooltip text-only-tooltip">
+        <div class="skill-tooltip-text">
+            <h3>Mathematical &amp; Physiological Modeling</h3>
+
+            <p>
+                Adept at translating complex human physiological mechanisms into rigorous 
+                mathematical frameworks using differential equations, with hands-on research 
+                experience in COVID-19/ARDS respiratory-cardiovascular coupling models and 
+                mechanical ventilation (PEEP) analysis.
+            </p>
+        </div>
+    </div>
+</div>
+<!-- Portfolio Management & Financial Risk Modeling -->
+<div class="skill-tag finance-skill-tag" style="top: 60%; left:45%;">
+    Portfolio Management &amp; Financial Risk Modeling
+
+    <div class="skill-tooltip finance-tooltip">
+        <!-- 左侧：标题和文字 -->
+        <div class="skill-tooltip-text">
+            <h3>Portfolio Management &amp; Financial Risk Modeling</h3>
+
+            <p class="skill-intro">
+                Selected for the prestigious track led by Professor
+                Alexei Chekhlov (Columbia University) at the 2025
+                International Innovative Talents Science Training Program.
+            </p>
+
+            <p>
+                Completed the Capital Markets course with a distinguished
+                grade of <b>93.3/100</b>, demonstrating rigorous quantitative
+                aptitude and academic excellence.
+            </p>
+
+            <p>
+                Mastered core quantitative finance frameworks, including
+                <b>portfolio theory</b>,
+                <b>asset pricing models (CAPM and APT)</b>,
+                financial risk management, and behavioral finance.
+            </p>
+        </div>
+
+        <!-- 右侧：PDF切换与预览 -->
+        <div class="pdf-switcher">
+            <!-- 横向PDF选择按钮 -->
+            <div class="pdf-tabs" role="tablist" aria-label="Finance documents">
+                <button
+                    class="pdf-tab active"
+                    type="button"
+                    data-pdf="assets/docs/finance-1.pdf">
+                    Certificate
+                </button>
+
+                <button
+                    class="pdf-tab"
+                    type="button"
+                    data-pdf="assets/docs/finance-2.pdf">
+                    Transcript
+                </button>
+
+                <button
+                    class="pdf-tab"
+                    type="button"
+                    data-pdf="assets/docs/finance-3.pdf">
+                    Course Outline
+                </button>
+            </div>
+
+            <!-- 当前PDF预览 -->
+            <div class="pdf-viewer">
+                <iframe
+                    class="pdf-viewer-frame"
+                    src="assets/docs/finance-1.pdf#view=FitH&toolbar=0&navpanes=0"
+                    title="Portfolio Management document preview">
+                </iframe>
+            </div>
+
+            <p class="pdf-viewer-hint">
+                Select a document above · Scroll vertically to view
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- 词条 8 -->
+<!-- Python -->
+<div class="skill-tag" style="top: 15%; left: 68%;">
+    Python
+
+    <div class="skill-tooltip text-only-tooltip">
+        <div class="skill-tooltip-text">
+            <h3>Python</h3>
+
+            <p>
+                Proficient in utilizing Python as a core engine for scientific computing, 
+                quantitative modeling, and data-driven analysis. Adept at leveraging libraries 
+                like <b>NumPy, Pandas, and SciPy</b> to process complex datasets, alongside 
+                frameworks like <b>PyTorch</b> to build and train machine learning models. 
+                Highly skilled in writing clean, modular, and optimized code for automation 
+                and algorithmic problem-solving.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- 词条 9 -->
+<!-- Statistical Computing & Data Analysis -->
+<div class="skill-tag" style="bottom: -10%; left: 70%;">
+    Statistical Computing <br> R/SPSS/Stata
+
+    <div class="skill-tooltip text-only-tooltip">
+        <div class="skill-tooltip-text">
+            <h3>Statistical Computing &amp; Data Analysis</h3>
+
+            <p>
+                Proficient in a versatile suite of statistical software to drive rigorous data 
+                analysis and research. Adept at leveraging <b>R</b> (specifically the <b>tidyverse</b> 
+                ecosystem) for exploratory data analysis, hypothesis testing, and creating 
+                publication-quality visualizations with <b>ggplot2</b>. 
+            </p>
+            
+            <p>
+                Competent in utilizing <b>Stata</b> for advanced econometric modeling and panel 
+                data analysis, as well as leveraging <b>SPSS</b> for efficient multivariate 
+                statistical analysis and survey data processing.
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<!-- 词条 10 -->
+<!-- HTML5 & CSS3 -->
+<div class="skill-tag" style="top: 60%; left: 70%;">
+    HTML5 &amp; CSS3
+
+    <div class="skill-tooltip text-only-tooltip">
+        <div class="skill-tooltip-text">
+            <h3>HTML5 &amp; CSS3 Development</h3>
+
+            <p>
+                Proficient in crafting responsive, semantically structured, and visually 
+                compelling web interfaces from scratch. Expert in modern styling paradigms 
+                including <b>Flexbox, CSS Grid, and custom animations</b>, ensuring seamless 
+                cross-browser compatibility and fluid user experiences across all devices.
+            </p>
+            
+            <p>
+                Passionate about translating complex design concepts into clean, 
+                maintainable, and highly optimized code.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- 词条 11 -->
+<!-- MATLAB -->
+<div class="skill-tag" style="top: 30%; left: 45%;">
+    MATLAB
+
+    <div class="skill-tooltip text-only-tooltip">
+        <div class="skill-tooltip-text">
+            <h3>MATLAB Programming</h3>
+
+            <p>
+                Proficient in utilizing MATLAB for mathematical modeling, numerical 
+                computation, and algorithms verification. Adept at developing custom 
+                scripts to solve differential equations, perform statistical analysis, 
+                and process laboratory data. 
+            </p>
+            
+            <p>
+                Skilled in generating high-quality scientific plots and charts to 
+                effectively visualize research findings.
+            </p>
+        </div>
+    </div>
+</div>
+
+
+                            <!-- 词条 5 -->
+<!-- Project Leadership & Operations -->
+<div class="skill-tag" style="top: 45%; left: 38%;">
+    Project Leadership
+
+    <div class="skill-tooltip reap-tooltip">
+        <!-- 左侧：所有标题和文字 -->
+        <div class="skill-tooltip-text">
+            <h3>Project Leadership &amp; Operations</h3>
+
+            <p class="skill-intro">
+                Spearheaded the <b>REAP Onsite Teacher Training</b>, a high-profile educational 
+                welfare program empowering rural English teachers across 13 provinces in China.
+            </p>
+
+            <p>
+                Demonstrated comprehensive <b>end-to-end project management</b> and 
+                <b>stakeholder coordination</b> by seamlessly liaising with prominent partners, 
+                including the Jack Ma Foundation, Beijing Normal University, and Match Light Welfare.
+            </p>
+
+            <p>
+                Oversaw multi-dimensional operations spanning <b>bilingual emceeing</b>, 
+                foreign guest reception, cross-cultural campus tours, budget/financial clearance, 
+                and official media coverage.
+            </p>
+        </div>
+
+        <!-- 右侧：三张照片轮播 -->
+        <div class="skill-carousel">
+            <div class="carousel-image-wrap">
+                <button
+                    class="carousel-arrow carousel-prev"
+                    type="button"
+                    aria-label="Previous photo">
+                    &#10094;
+                </button>
+
+                <!-- 照片 1 -->
+                <img
+                    class="carousel-image active"
+                    src="assets/images/activity-1.jpg"
+                    alt="REAP Project Leadership"
+                    data-caption="Onsite Event Photo">
+
+                <!-- 照片 2 -->
+                <img
+                    class="carousel-image"
+                    src="assets/images/activity-2.jpg"
+                    alt="Stakeholder coordination"
+                    data-caption="Onsite Event Photo">
+
+                <!-- 照片 3 -->
+                <img
+                    class="carousel-image original-ratio"
+                    src="assets/images/activity-3.jpg"
+                    alt="Media operations"
+                    data-caption="Onsite Event Photo">
+
+                <button
+                    class="carousel-arrow carousel-next"
+                    type="button"
+                    aria-label="Next photo">
+                    &#10095;
+                </button>
+            </div>
+
+            <!-- 初始字幕，与第一张图的 data-caption 保持一致 -->
+            <p class="carousel-caption">
+                Project Leadership | REAP Onsite Teacher Training Program
+            </p>
+
+            <!-- 三个导航小圆点 -->
+            <div class="carousel-dots" aria-label="Photo position">
+                <span class="carousel-dot active"></span>
+                <span class="carousel-dot"></span>
+                <span class="carousel-dot"></span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+                    </div> <!-- skills-section 结束 -->
+
+                </div> <!-- 🎯 核心物理墙 about-scroll-wrapper 结束 -->
+
+                <!-- 3. 🎯 continue 按钮钉死在右下角 -->
+                <a class="hello-scroll" href="#experience">
                     continue
                 </a>
             </section>
 
-            <section id="projects" class="section">
-                <nav class="section-nav" aria-label="About navigation">
-    <a class="site-name" href="#home">Wanyu LIN</a>
-    <div class="section-nav-links">
-        <a href="#about">关于我</a>
-        <a href="#projects">项目经历</a>
-        <a href="#materials">可视化成果</a>
-        <a href="#contact">联系我</a>
-    </div>
-    <!-- 菜单栏下方独立语言切换行 -->
-    <div class="lang-switch-wrap">
-        <span class="lang-option zh-btn">中</span>
-        <span class="lang-divider"> / </span>
-        <span class="lang-option en-btn">EN</span>
-    </div>
-</nav>
-                <div class="section-heading reveal">
-    <div>
-        <!-- 🎯 精简：合二为一，去掉了重复的 02 / -->
-        <span class="eyebrow">02 / Experience and Projects</span>
-        <!-- 🎯 精简：移除了内部所有 span 标签，直奔主题 -->
-        <h2>Project threads shaped for internship reviewers.</h2>
-    </div>
-    <!-- 🎯 精简：原本很长的中英混合段落，现在只有纯净的英文说明 -->
-    <p>These cards can later link to detail pages, GitHub repositories, papers, screenshots, or interactive demos.</p>
-</div>
-                    <p>
-                        <span class="zh">这些卡片之后可以接入项目详情页、GitHub、论文 PDF、数据可视化截图或交互式 Demo。</span>
-                        <span class="en">These cards can later link to detail pages, GitHub repositories, papers, screenshots, or interactive demos.</span>
-                    </p>
-                </div>
+<!--新的页面-->
+            <section id="experience" class="section">
+    <nav class="section-nav" aria-label="About navigation">
+        <a class="site-name" href="#home">Wanyu LIN</a>
+        <div class="section-nav-links">
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+    
+    <div class="section-heading reveal">
+        <div>
+            <!--<span class="eyebrow">02 / Experience</span>-->
+            <h2>Experience</h2>
+        </div>
+        
+        <p>These cards can later link to detail pages, GitHub repositories, papers, screenshots, or interactive demos.</p>
+        <p>这些卡片之后可以接入项目详情页、GitHub、论文 PDF、数据可视化截图或交互式 Demo。</p>
+    </div> <!-- 🎯 闭合标签归位！ -->
+    
+    <!-- 🌟 你原本消失的那些项目卡片和后续内容，现在可以直接紧接着写在下面了 🌟 -->
+
 
                 <div class="project-grid">
                     <article class="project-card reveal" style="--accent: var(--teal);">
@@ -1589,36 +2912,28 @@ section, .section {
                     </article>
                 </div>
                 <!-- 新增和首页同款右下角continue按钮 -->
-                <a class="hello-scroll" href="#materials">
+                <a class="hello-scroll" href="#projects">
                     continue
                 </a>
             </section>
-/* 新的页面*/
-            <section id="materials" class="section">
+            
+<!--新的页面-->
+            <section id="projects" class="section">
                 <nav class="section-nav" aria-label="About navigation">
     <a class="site-name" href="#home">Wanyu LIN</a>
     <div class="section-nav-links">
-        <a href="#about">关于我</a>
-        <a href="#projects">项目经历</a>
-        <a href="#materials">可视化成果</a>
-        <a href="#contact">联系我</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
     </div>
-    <!-- 菜单栏下方独立语言切换行 -->
-    <div class="lang-switch-wrap">
-        <span class="lang-option zh-btn">中</span>
-        <span class="lang-divider"> / </span>
-        <span class="lang-option en-btn">EN</span>
-    </div>
+    
 </nav>
                 <div class="section-heading reveal">
                     <div>
-                        <span class="eyebrow">
-                            <span class="zh">03 / 可查看资料</span>
-                            <span class="en">03 / Materials</span>
-                        </span>
+                        
                         <h2>
-                            <span class="zh">简历、作品集和后续文件会集中放在这里。</span>
-                            <span class="en">Resume, portfolio, and future documents live here.</span>
+                            Projects
                         </h2>
                     </div>
                     <p>
@@ -1686,37 +3001,30 @@ section, .section {
                 <nav class="section-nav" aria-label="Contact navigation">
                     <a class="site-name" href="#home">Wanyu LIN</a>
                     <div class="section-nav-links">
-                        <a href="#about">关于我</a>
-                        <a href="#projects">项目经历</a>
-                        <a href="#materials">可视化成果</a>
-                        <a href="#contact">联系我</a>
+                        <a href="#about">About</a>
+                        <a href="#experience">Experience</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#contact">Contact</a>
                     </div>
-                    <div class="lang-switch-wrap">
-                        <span class="lang-option zh-btn">中</span>
-                        <span class="lang-divider"> / </span>
-                        <span class="lang-option en-btn">EN</span>
-                    </div>
+                    
                 </nav>
                 <div class="contact-band reveal">
                     <div>
-                        <span class="eyebrow">
-                            <span class="zh">04 / 联系</span>
-                            <span class="en">04 / Contact</span>
-                        </span>
+                        
                         <h2>
-                            <span class="zh">正在寻找实习机会，也欢迎交流项目想法。</span>
-                            <span class="en">Open to internships and project conversations.</span>
+                            Contact
                         </h2>
                         <p>
-                            <span class="zh">如果你希望了解我的项目细节、简历或作品材料，可以通过邮件联系我。后续这里也可以加 LinkedIn、GitHub、微信二维码或预约链接。</span>
-                            <span class="en">For project details, resume materials, or collaboration ideas, feel free to reach out by email. LinkedIn, GitHub, WeChat QR, or booking links can be added later.</span>
+                           Thank you for visiting. <br>
+For portfolios, resumes, or collaboration inquiries, <br> 
+feel free to contact me via email, or phone.
                         </p>
                     </div>
                     <div class="contact-links">
                         <a href="mailto:hvywl2@nottingham.edu.cn">hvywl2@nottingham.edu.cn</a>
                         <a href="tel:+8618382207138">+86 183 8220 7138</a>
-                        <a href="#materials">
-                            <span class="zh">返回资料区</span>
+                        <a href="#projects">
+                            <span>  Back to Materials </span>
                             <span class="en">Back to Materials</span>
                         </a>
                     </div>
@@ -1724,6 +3032,10 @@ section, .section {
             </section>
         </main>
     </div>
+<!-- 全站版权信息 -->
+    <footer class="site-footer">
+        &copy; 2026 Auniy. All rights reserved.
+    </footer>
 
     <script>
     const body = document.body;
@@ -1767,45 +3079,159 @@ const observer = new IntersectionObserver((entries) => {
 
 revealItems.forEach((item) => observer.observe(item));
     </script>
-<!-- 🎯 菜单栏全自动智能感应变色脚本 -->
+
+
+
+<!-- 导航栏自动识别当前页面 -->
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    // 1. 设置观察规则：当板块占据屏幕中间核心区域时触发变色
-    const options = {
-        root: null,
-        rootMargin: '-25% 0px -45% 0px', // 触发区域微调，确保滚动时变色时机最自然
-        threshold: 0
-    };
+document.addEventListener('DOMContentLoaded', () => {
+    const main = document.querySelector('main');
 
-    // 2. 核心变色逻辑
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // 拿到当前滚入视野的板块的 ID（比如 "projects"）
-                const id = entry.target.getAttribute('id');
-                
-                // 找到菜单栏里对应的那个 <a> 标签
-                const targetLink = document.querySelector(`a[href="#${id}"]`);
-                
-                if (targetLink) {
-                    // 先清洗掉菜单栏所有按钮的 active 类
-                    document.querySelectorAll('a[href^="#"]').forEach(link => link.classList.remove('active'));
-                    // 精准为当前处于视野中的按钮戴上 active 的高亮戳印
-                    targetLink.classList.add('active');
+    const sections = document.querySelectorAll(
+        '#about, #experience, #projects, #contact'
+    );
+
+    function activateNavigation(sectionId) {
+        /* 清除全部导航栏的旧状态 */
+        document
+            .querySelectorAll('.section-nav-links a')
+            .forEach((link) => {
+                link.classList.remove('active');
+            });
+
+        /* 所有导航栏中相同页面的按钮一起高亮 */
+        document
+            .querySelectorAll(
+                `.section-nav-links a[href="#${sectionId}"]`
+            )
+            .forEach((link) => {
+                link.classList.add('active');
+            });
+    }
+
+    const navigationObserver = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    activateNavigation(entry.target.id);
                 }
-            }
-        });
-    }, options);
-
-    // 3. 自动让“摄像头”开始监控这四个大板块
-    // 💡 提示：请确保你网页里那四个大盒子的 id 分别就是 "about"、"projects"、"materials"、"contact"
-    const sectionIds = ['about', 'projects', 'materials', 'contact'];
-    
-    sectionIds.forEach(id => {
-        const section = document.getElementById(id);
-        if (section) {
-            observer.observe(section);
+            });
+        },
+        {
+            /* 你的页面是在 main 内切换，因此监听 main */
+            root: main,
+            threshold: 0.55
         }
+    );
+
+    sections.forEach((section) => {
+        navigationObserver.observe(section);
+    });
+
+    /* 页面首次打开或刷新时立即判断 */
+    const initialSection =
+        window.location.hash.replace('#', '') || 'about';
+
+    if (
+        ['about', 'experience', 'projects', 'contact']
+            .includes(initialSection)
+    ) {
+        activateNavigation(initialSection);
+    }
+});
+</script>
+
+<script>
+document.querySelectorAll('.skill-carousel').forEach((carousel) => {
+    const images = carousel.querySelectorAll('.carousel-image');
+    const dots = carousel.querySelectorAll('.carousel-dot');
+    const caption = carousel.querySelector('.carousel-caption');
+    const previousButton = carousel.querySelector('.carousel-prev');
+    const nextButton = carousel.querySelector('.carousel-next');
+
+    let currentIndex = 0;
+
+    function showImage(index) {
+        currentIndex = (index + images.length) % images.length;
+
+        images.forEach((image, imageIndex) => {
+            image.classList.toggle('active', imageIndex === currentIndex);
+        });
+
+        dots.forEach((dot, dotIndex) => {
+            dot.classList.toggle('active', dotIndex === currentIndex);
+        });
+
+        caption.style.opacity = '0';
+
+        setTimeout(() => {
+            caption.textContent =
+                images[currentIndex].dataset.caption || '';
+            caption.style.opacity = '1';
+        }, 150);
+    }
+
+    previousButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        showImage(currentIndex - 1);
+    });
+
+    nextButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        showImage(currentIndex + 1);
+    });
+
+    showImage(0);
+});
+</script>
+
+
+<script>
+document.querySelectorAll('.pdf-switcher').forEach((switcher) => {
+    const tabs = switcher.querySelectorAll('.pdf-tab');
+    const frame = switcher.querySelector('.pdf-viewer-frame');
+
+    tabs.forEach((tab) => {
+        tab.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            tabs.forEach((item) => {
+                item.classList.remove('active');
+            });
+
+            tab.classList.add('active');
+
+            const pdfPath = tab.dataset.pdf;
+
+            frame.src =
+                pdfPath + '#view=FitH&toolbar=0&navpanes=0';
+        });
+    });
+});
+</script>
+
+<script>
+document.querySelector('.skills-guide')?.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    const aboutWrapper = document.querySelector('.about-scroll-wrapper');
+    const skillsSection = document.querySelector('#skills');
+
+    if (!aboutWrapper || !skillsSection) return;
+
+    /* 计算 Skills 相对于 About 内部滚动容器的位置 */
+    const targetPosition =
+        skillsSection.getBoundingClientRect().top
+        - aboutWrapper.getBoundingClientRect().top
+        + aboutWrapper.scrollTop;
+
+    /* 只滚动 About 内部，不移动外层 main */
+    aboutWrapper.scrollTo({
+        top: targetPosition - 40,
+        behavior: 'smooth'
     });
 });
 </script>
