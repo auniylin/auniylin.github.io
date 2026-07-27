@@ -7,6 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <style>
         :root {
             --ivory: #faf9f4;
@@ -290,11 +293,12 @@ main {
             right: clamp(22px, 5vw, 72px);
             bottom: clamp(22px, 5vw, 54px);
             z-index: 3;
-            border: 2px solid #1D4B6C;
+            font-family: 'Playfair Display', Georgia, serif;
+            border: 2px solid #D5534A80;
             border-radius: 999px;
-            padding: 11px 16px;
-            color: #8688BC;
-            font-size: 18.5px;
+            padding: 6px 10px;
+            color: #D5534A;
+            font-size: 14px;
             font-weight: 820;
             letter-spacing: 0.08em;
             opacity: 0;
@@ -713,7 +717,7 @@ main {
 
         .section:not(.hero) {
     padding-top: 25px;
-    padding-bottom: 132px;
+    padding-bottom: 45px;
 }
 
         .section:not(.hero)::after {
@@ -733,9 +737,9 @@ main {
 }
 
         .site-name {
-            font-family: "Courier Prime", "Source Han Sans SC", "Noto Sans SC", monospace;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 14px;
-            font-weight: 400;
+            font-weight: 500;
             letter-spacing: 0.08em;
             text-decoration: underline;
             text-underline-offset: 4px;
@@ -753,9 +757,9 @@ main {
             padding: 0;
             background: transparent;
             color: rgba(13, 30, 61, 0.82);
-            font-family: "Courier Prime", "Source Han Sans SC", "Noto Sans SC", monospace;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 14px;
-            font-weight: 400;
+            font-weight: 500;
             letter-spacing: 0.075em;
             line-height: 1.8;
             text-decoration: underline;
@@ -2162,6 +2166,842 @@ footer {
 #contact .contact-band {
     transform: translateY(90px) !important;
 }
+/* Contact页所有主要内容整体向下移动 */
+#contact .contact-band {
+    transform: translateY(90px) !important;
+}
+
+
+/* =========================================================
+   EXPERIENCE TIMELINE
+   ========================================================= */
+
+.experience-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 70px 70px 150px;
+    scrollbar-width: none;
+}
+
+.experience-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Experience 标题区域 */
+.experience-header {
+    width: min(1180px, 100%);
+    margin: 0 auto 120px;
+    display: grid;
+    grid-template-columns: 1fr 0.7fr;
+    gap: 80px;
+    align-items: end;
+}
+
+.experience-kicker {
+    margin-bottom: 18px;
+    color: rgba(13, 30, 61, 0.5);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+}
+
+.experience-header h2 {
+    margin: 0;
+    color: #1d4b6c;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(52px, 7vw, 90px);
+    font-weight: 700;
+    line-height: 1;
+}
+
+.experience-intro {
+    color: rgba(13, 30, 61, 0.68);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+/* 时间线整体 */
+.journey-timeline {
+    position: relative;
+    width: min(1180px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 180px 1fr;
+    row-gap: 110px;
+    padding: 30px 0 100px;
+}
+
+/* 中间曲线 */
+.journey-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 180px;
+    height: 100%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    overflow: visible;
+}
+
+.journey-line path {
+    fill: none !important;
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+}
+
+.journey-line-background {
+    stroke: rgba(13, 30, 61, 0.15);
+}
+
+.journey-line-progress {
+    stroke: #1b3f8b;
+    stroke-linecap: round;
+}
+
+/* 时间线经历节点 */
+.journey-entry {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.journey-entry.entry-left {
+    grid-column: 1;
+    padding-right: 45px;
+    text-align: right;
+}
+
+.journey-entry.entry-right {
+    grid-column: 3;
+    padding-left: 45px;
+    text-align: left;
+}
+
+.journey-entry:nth-of-type(2) {
+    grid-row: 2;
+}
+
+.journey-entry:nth-of-type(3) {
+    grid-row: 3;
+}
+
+.journey-entry:nth-of-type(4) {
+    grid-row: 4;
+}
+
+.journey-entry:nth-of-type(5) {
+    grid-row: 5;
+}
+
+.journey-entry:nth-of-type(6) {
+    grid-row: 6;
+}
+
+/* 点击区域 */
+.journey-summary {
+    position: relative;
+    width: 100%;
+    border: 0;
+    padding: 0;
+    color: #0d1e3d;
+    background: transparent;
+    font: inherit;
+    text-align: inherit;
+    cursor: pointer;
+}
+
+.journey-summary > span:not(.journey-dot) {
+    display: block;
+}
+
+/* 时间线圆点 */
+.journey-dot {
+    position: absolute;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    border: 3px solid #faf9f4;
+    border-radius: 50%;
+    background: #0d1e3d;
+    box-shadow: 0 0 0 1px #0d1e3d;
+}
+
+.entry-left .journey-dot {
+    right: -98px;
+}
+
+.entry-right .journey-dot {
+    left: -98px;
+}
+
+.journey-entry.open .journey-dot {
+    width: 21px;
+    height: 21px;
+    background: #f2c315;
+}
+
+/* 节点文字 */
+.journey-date {
+    color: #0d1e3d;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+.journey-category {
+    margin-top: 8px;
+    color: #D5534A;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+}
+
+.journey-title {
+    margin-top: 14px;
+    color: #0d1e3d;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(18px, 2vw, 28px);
+    font-weight: 660;
+    line-height: 1.25;
+}
+
+.journey-place {
+    margin-top: 11px;
+    color: #1E2739;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+}
+
+.journey-short {
+    max-width: 450px;
+    margin-top: 17px;
+    color: rgba(13, 30, 61, 0.67);
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    letter-spacing: 0.07em;
+}
+
+.entry-left .journey-short {
+    margin-left: auto;
+}
+
+.journey-toggle {
+    margin-top: 18px;
+    color: #1b3f8b;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 25px;
+}
+
+/* 点击展开的详细内容 */
+.journey-details {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+        grid-template-rows 0.4s ease,
+        opacity 0.3s ease;
+}
+
+.journey-entry.open .journey-details {
+    grid-template-rows: 1fr;
+    opacity: 1;
+}
+
+.journey-details-inner {
+    min-height: 0;
+    overflow: hidden;
+}
+
+.journey-entry.open .journey-details-inner {
+    padding-top: 25px;
+}
+
+.journey-details p {
+    margin-top: 13px;
+    color: rgba(13, 30, 61, 0.68);
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    line-height: 1.85;
+}
+
+.journey-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 15px;
+    margin-top: 22px;
+}
+
+.entry-left .journey-tags {
+    justify-content: flex-end;
+}
+
+.journey-tags span {
+    color: #D5534A;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.journey-results {
+    display: flex;
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.entry-left .journey-results {
+    justify-content: flex-end;
+}
+
+.journey-results div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.journey-results strong {
+    color: #1b3f8b;
+    font-family: "Montserrat", sans-serif;
+    font-size: 23px;
+}
+
+.journey-results span {
+    color: rgba(13, 30, 61, 0.55);
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+}
+
+/* 两个 Drug Discovery 项目 */
+.research-stage + .research-stage {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(13, 30, 61, 0.12);
+}
+
+.research-stage-date {
+    color: #1b3f8b;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+}
+
+.research-stage h4 {
+    margin-top: 8px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+}
+
+/* Additional Experience */
+.additional-experience {
+    width: min(960px, 100%);
+    margin: 130px auto 0;
+    padding-top: 40px;
+    border-top: 1px solid rgba(13, 30, 61, 0.15);
+}
+
+.additional-toggle {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border: 0;
+    padding: 0;
+    color: #0d1e3d;
+    background: transparent;
+    font-family: "Montserrat", sans-serif;
+    font-size: 28px;
+    font-weight: 660;
+    text-align: left;
+    cursor: pointer;
+}
+
+.additional-toggle small {
+    display: block;
+    margin-bottom: 8px;
+    color: rgba(13, 30, 61, 0.45);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+}
+
+.additional-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+        grid-template-rows 0.4s ease,
+        opacity 0.3s ease;
+}
+
+.additional-experience.open .additional-content {
+    grid-template-rows: 1fr;
+    opacity: 1;
+}
+
+.additional-content-inner {
+    min-height: 0;
+    overflow: hidden;
+}
+
+.additional-experience.open .additional-content-inner {
+    padding-top: 35px;
+}
+
+.additional-item {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 30px;
+    padding: 25px 0;
+    border-bottom: 1px solid rgba(13, 30, 61, 0.1);
+}
+
+.additional-item time {
+    color: #0d1e3d;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+.additional-item h3 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: 660;
+}
+
+.additional-item p {
+    margin-top: 9px;
+    color: rgba(13, 30, 61, 0.65);
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    font-weight: 500;
+}
+
+.additional-item div > span {
+    display: block;
+    margin-top: 10px;
+    color: #D5534A;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+}
+
+/* 手机 */
+@media (max-width: 760px) {
+    .experience-scroll {
+        padding: 55px 24px 130px;
+    }
+
+    .experience-header {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        margin-bottom: 80px;
+    }
+
+    .journey-timeline {
+        display: block;
+        padding-left: 42px;
+    }
+
+    .journey-line {
+        left: 7px;
+        width: 2px;
+        transform: none;
+    }
+
+    .journey-entry,
+    .journey-entry.entry-left,
+    .journey-entry.entry-right {
+        margin-bottom: 80px;
+        padding: 0;
+        text-align: left;
+    }
+
+    .entry-left .journey-dot,
+    .entry-right .journey-dot {
+        left: -42px;
+        right: auto;
+    }
+
+    .entry-left .journey-short {
+        margin-left: 0;
+    }
+
+    .entry-left .journey-tags,
+    .entry-left .journey-results {
+        justify-content: flex-start;
+    }
+
+    .additional-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+/* Experience 标题固定在滚动区域外 */
+#experience .experience-header {
+    flex: 0 0 auto;
+
+    width: min(1180px, calc(100% - 80px));
+    margin: 0 auto 12px;
+
+    padding-top: 4px;
+    padding-bottom: 12px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.7fr);
+    gap: 70px;
+    align-items: end;
+
+    background: var(--ivory);
+    z-index: 5;
+}
+
+/* 缩小标题上方空白 */
+#experience .experience-kicker {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+
+
+/* 时间线滚动区域不再保留原来的大顶部空白 */
+#experience .experience-scroll {
+    flex: 1;
+    min-height: 0;
+
+    padding-top: 28px;
+}
+/* =========================================================
+   修复 Experience 固定标题与内部滚动
+   ========================================================= */
+
+/* Experience 整体固定为一屏 */
+#experience.experience-section {
+    display: flex !important;
+    flex-direction: column !important;
+
+    width: 100% !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+
+    overflow: hidden !important;
+}
+
+/* 菜单栏不缩小、不参与滚动 */
+#experience > .section-nav {
+    flex: 0 0 auto !important;
+}
+
+/* 标题不缩小、不参与滚动 */
+#experience > .experience-header {
+    flex: 0 0 auto !important;
+
+    width: min(1180px, calc(100% - 80px));
+    margin: 0 auto 10px;
+
+    padding-top: 0;
+    padding-bottom: 10px;
+}
+
+/* 时间线占据菜单和标题之外的全部剩余空间 */
+#experience > .experience-scroll {
+    flex: 1 1 0 !important;
+
+    /* 关键：强制浏览器把剩余高度分给它 */
+    height: 0 !important;
+    min-height: 0 !important;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    padding-top: 28px;
+    padding-bottom: 150px;
+
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+/*
+Additional Experience 本身也是 section，
+覆盖全局 section { height: 100vh }，否则它会被强制变成一整屏高。
+*/
+#experience .additional-experience {
+    height: auto !important;
+    min-height: 0 !important;
+}
+/* =========================================================
+   Experience 标题与 milestone 文字调整
+   ========================================================= */
+
+/* 缩小标题栏左右边距 */
+#experience > .experience-header {
+    width: calc(100% - 40px) !important;
+    max-width: none !important;
+
+    /* 左右各20px */
+    margin-left: 16px !important;
+    margin-right: 12px !important;
+
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+
+
+/* 缩小标题上方类别文字 */
+#experience .experience-kicker {
+    margin-bottom: 6px !important;
+    font-size: 11px !important;
+}
+
+/* 右侧页面介绍 */
+#experience .experience-intro {
+    font-family:
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif !important;
+
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+}
+
+/* =========================================================
+   Experience 顶部改为左侧单栏
+   ========================================================= */
+
+#experience > .experience-header {
+    width: calc(100% - 40px) !important;
+    max-width: none !important;
+
+    margin: 0 20px 8px !important;
+    padding: 0 0 12px !important;
+
+    display: block !important;
+    flex: 0 0 auto !important;
+
+    background: var(--ivory);
+}
+
+/* 限制顶部文字宽度，避免一整行过长 */
+#experience .experience-header-copy {
+    width: min(760px, 100%);
+}
+
+/* 分类文字 */
+#experience .experience-kicker {
+    margin: 0 0 10px !important;
+    padding: 0 !important;
+
+    color: rgba(13, 30, 61, 0.949);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 16px !important;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.14em;
+}
+
+/* 原右侧介绍文字，现在放在左上方 */
+#experience .experience-intro {
+    margin: 0 !important;
+    padding: 0 !important;
+
+    color: rgba(13, 30, 61, 0.72);
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-size: 17px !important;
+    font-weight: 400;
+    line-height: 1.3 !important;
+    letter-spacing: 0.01em;
+}
+/* 扩大 Experience 实际内容区域 */
+#experience > .experience-header {
+    margin-bottom: 0 !important;
+    padding-bottom: 6px !important;
+}
+
+/* 减少时间线上下空白，让滚动区域更接近页面底部 */
+#experience > .experience-scroll {
+    padding-top: 16px !important;
+    padding-bottom: 45px !important;
+}
+
+/* 减少每个 milestone 之间的垂直距离 */
+#experience .journey-timeline {
+    row-gap: 75px !important;
+    padding-top: 20px !important;
+    padding-bottom: 45px !important;
+}
+/* =========================================================
+   Experience Preview Buttons
+   ========================================================= */
+
+.journey-preview {
+
+    display:flex;
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:16px;
+    margin-bottom:12px;
+
+}
+
+/* Preview buttons */
+.journey-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    margin-top: 16px;
+    margin-bottom: 12px;
+}
+
+
+/* 保持原来的胶囊按钮样式 */
+.journey-preview a {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 18px;
+
+    border: 1px solid rgba(13,30,61,0.3);
+    border-radius: 999px;
+
+    color: var(--cobalt) !important;
+
+    background: transparent;
+
+    font-family:
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    font-size: 12px;
+
+    letter-spacing: 0.08em;
+
+    text-decoration: none !important;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+.journey-preview a:hover {
+
+    background: var(--lemon);
+
+    border-color: var(--lemon);
+
+    color: var(--midnight) !important;
+
+}
+
+
+.journey-preview a:hover {
+    background: var(--lemon);
+    border-color: var(--lemon);
+    color: var(--midnight);
+}
+
+
+/* 图片预览 */
+.preview-gallery {
+    display:flex;
+    gap:14px;
+    margin-top:25px;
+}
+
+.preview-gallery img {
+    width:140px;
+    height:90px;
+
+    object-fit:cover;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    transition:
+        transform .25s ease,
+        opacity .25s ease;
+}
+
+
+.preview-gallery img:hover {
+    transform:scale(1.05);
+    opacity:.85;
+}
+.entry-left .journey-preview {
+    justify-content: flex-end;
+}
+
+.entry-right .journey-preview {
+    justify-content: flex-start;
+}
+.journey-preview {
+    display:flex;
+    gap:12px;
+    margin-top:18px;
+}
+
+
+.journey-preview a {
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:8px 18px;
+
+    border:1px solid rgba(13,30,61,0.25);
+
+    border-radius:999px;
+
+    color:#1B3F8B;
+
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    font-size:12px;
+
+    letter-spacing:0.08em;
+
+    text-decoration:none;
+
+    transition:all 0.25s ease;
+}
+
+
+.journey-preview a:hover {
+
+    background:#F2C315;
+
+    border-color:#F2C315;
+
+    color:#0D1E3D;
+
+}
+.entry-left .journey-preview{
+    justify-content:flex-end;
+}
+
+
+.entry-right .journey-preview{
+    justify-content:flex-start;
+}
  </style>
     
 </head>
@@ -2203,8 +3043,8 @@ footer {
                     <a class="site-name" href="#home">Wanyu LIN</a>
                     <div class="section-nav-links">
                         <a href="#about">About</a>
+                        <a href="#skills">Skills</a>
                         <a href="#experience">Experience</a>
-                        <a href="#projects">Projects</a>
                         <a href="#contact">Contact</a>
                     </div>
                 </nav>
@@ -2479,6 +3319,11 @@ footer {
     src="assets/images/hosting-3.jpg"
     alt="University media article"
     data-caption="Article Writing for University Official Media">
+<img
+                    class="carousel-image"
+                    src="assets/images/livestream.jpg"
+                    alt="Campus tour"
+                    data-caption="Live Stream Promotion | 2026 UNNC Campus Open Day">
 
                 <button
                     class="carousel-arrow carousel-next"
@@ -2494,6 +3339,7 @@ footer {
 
             <div class="carousel-dots" aria-label="Photo position">
                 <span class="carousel-dot active"></span>
+                <span class="carousel-dot"></span>
                 <span class="carousel-dot"></span>
                 <span class="carousel-dot"></span>
             </div>
@@ -2773,237 +3619,780 @@ footer {
 
                 <!-- 3. 🎯 continue 按钮钉死在右下角 -->
                 <a class="hello-scroll" href="#experience">
-                    continue
-                </a>
+    continue
+</a>
             </section>
 
-<!--新的页面-->
-            <section id="experience" class="section">
-    <nav class="section-nav" aria-label="About navigation">
+
+            
+<!-- EXPERIENCE TIMELINE -->
+<section id="experience" class="section experience-section">
+
+    <nav class="section-nav" aria-label="Experience navigation">
         <a class="site-name" href="#home">Wanyu LIN</a>
+
         <div class="section-nav-links">
             <a href="#about">About</a>
+            <a href="#skills">Skills</a>
             <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
-    
-    <div class="section-heading reveal">
-        <div>
-            <!--<span class="eyebrow">02 / Experience</span>-->
-            <h2>Experience</h2>
-        </div>
+<header class="experience-header">
+    <div class="experience-header-copy">
+        <p class="experience-kicker">
+            RESEARCH · INTERNSHIP · MODELLING · EDUCATION
+        </p>
+
+        <p class="experience-intro">   
+A reverse-chronological journey through my academic,
+research and professional development.
+        </p>
+    </div>
+</header>
+
+    <div class="experience-scroll">
+
         
-        <p>These cards can later link to detail pages, GitHub repositories, papers, screenshots, or interactive demos.</p>
-        <p>这些卡片之后可以接入项目详情页、GitHub、论文 PDF、数据可视化截图或交互式 Demo。</p>
-    </div> <!-- 🎯 闭合标签归位！ -->
-    
-    <!-- 🌟 你原本消失的那些项目卡片和后续内容，现在可以直接紧接着写在下面了 🌟 -->
 
+        <div class="journey-timeline">
 
-                <div class="project-grid">
-                    <article class="project-card reveal" style="--accent: var(--teal);">
-                        <div>
-                            <h3>
-                                <span class="zh">心肺系统数理建模研究</span>
-                                <span class="en">Cardiopulmonary System Modeling</span>
-                            </h3>
-                            <p>
-                                <span class="zh">调研 ARDS/COVID-19 场景下呼吸-心血管耦合模型，梳理 ODE 框架、核心参数和 PEEP 对生理指标的影响。</span>
-                                <span class="en">Reviewed ODE-based respiratory-cardiovascular coupled models for ARDS/COVID-19 and summarized mechanisms around PEEP and clinical indicators.</span>
-                            </p>
-                        </div>
-                        <div class="project-meta">
-                            <span>ODE</span>
-                            <span>Physiology</span>
-                            <span>Research</span>
-                        </div>
-                    </article>
+            <!-- 中间曲线路径 -->
+            <svg
+                class="journey-line"
+                viewBox="0 0 200 1200"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+            >
+                <path
+                    class="journey-line-background"
+                    fill="none"
+                    d="M100 0
+                       C170 90, 170 180, 100 240
+                       C30 300, 30 420, 100 480
+                       C170 540, 170 660, 100 720
+                       C30 780, 30 900, 100 960
+                       C170 1020, 160 1120, 100 1200"
+                />
 
-                    <article class="project-card reveal" style="--accent: var(--coral);">
-                        <div>
-                            <h3>
-                                <span class="zh">投资组合管理与财务风险分析</span>
-                                <span class="en">Portfolio and Financial Risk Analysis</span>
-                            </h3>
-                            <p>
-                                <span class="zh">系统学习资本市场、Markowitz 优化、CAPM、APT 与风险管理，并用 Excel 规划求解完成资产配置作业。</span>
-                                <span class="en">Studied capital markets, Markowitz optimization, CAPM, APT, and risk management, using Excel Solver for portfolio allocation exercises.</span>
-                            </p>
-                        </div>
-                        <div class="project-meta">
-                            <span>Finance</span>
-                            <span>Risk</span>
-                            <span>Excel Solver</span>
-                        </div>
-                    </article>
+                <path
+                    class="journey-line-progress"
+                    fill="none"
+                    d="M100 0
+                       C170 90, 170 180, 100 240
+                       C30 300, 30 420, 100 480
+                       C170 540, 170 660, 100 720
+                       C30 780, 30 900, 100 960
+                       C170 1020, 160 1120, 100 1200"
+                />
+            </svg>
 
-                    <article class="project-card reveal" style="--accent: var(--blue);">
-                        <div>
-                            <h3>
-                                <span class="zh">MCM 多目标优化模型</span>
-                                <span class="en">MCM Multi-objective Optimization</span>
-                            </h3>
-                            <p>
-                                <span class="zh">围绕太空电梯与传统火箭运输方案，综合成本、时间、环境三维目标，构建多场景优化策略并完成英文论文。</span>
-                                <span class="en">Modeled space elevator and rocket transportation strategies with cost, time, and environmental objectives, producing an English academic paper.</span>
-                            </p>
-                        </div>
-                        <div class="project-meta">
-                            <span>Optimization</span>
-                            <span>MCM</span>
-                            <span>Paper</span>
-                        </div>
-                    </article>
+            <!-- 01 Quantitative Research -->
+            <article class="journey-entry entry-left">
+                <button
+                    class="journey-summary"
+                    type="button"
+                    aria-expanded="false"
+                >
+                    <span class="journey-dot"></span>
 
-                    <article class="project-card reveal" style="--accent: var(--gold);">
-                        <div>
-                            <h3>
-                                <span class="zh">CUMCM 红外光谱厚度反演</span>
-                                <span class="en">CUMCM Infrared Spectrum Inversion</span>
-                            </h3>
-                            <p>
-                                <span class="zh">基于红外干涉原理、FFT、最小二乘拟合、柯西色散与 Drude 模型，构建碳化硅外延层厚度测定方案。</span>
-                                <span class="en">Built a silicon carbide epitaxial layer thickness model using infrared interference, FFT, least squares fitting, Cauchy dispersion, and Drude models.</span>
-                            </p>
-                        </div>
-                        <div class="project-meta">
-                            <span>FFT</span>
-                            <span>Least Squares</span>
-                            <span>CUMCM</span>
-                        </div>
-                    </article>
+                    <span class="journey-date">JUN — AUG 2026</span>
+                    <span class="journey-category">INTERNSHIP</span>
 
-                    <article class="project-card reveal" style="--accent: var(--teal);">
-                        <div>
-                            <h3>
-                                <span class="zh">量化因子数据库与回测</span>
-                                <span class="en">Quant Factor Database and Backtesting</span>
-                            </h3>
-                            <p>
-                                <span class="zh">基于 Python 处理行情、财报、舆情等多源数据，协助完成多因子选股模型的回测、绩效测算与有效性分析。</span>
-                                <span class="en">Used Python to process market, financial, and sentiment data for factor construction, model backtesting, performance metrics, and validation.</span>
-                            </p>
-                        </div>
-                        <div class="project-meta">
+                    <span class="journey-title">
+                        Quantitative Research Intern
+                    </span>
+
+                    <span class="journey-place">
+                        SDIC Securities · Chengdu
+                    </span>
+
+                    <span class="journey-short">
+                        Financial data engineering, factor research,
+                        backtesting and portfolio risk analysis.
+                    </span>
+
+                    <span class="journey-toggle">+</span>
+                </button>
+
+                <div class="journey-details">
+                    <div class="journey-details-inner">
+                        <p>
+                            Processed multi-source A-share market, financial
+                            statement and sentiment data using Python. Supported
+                            feature engineering, standardised factor database
+                            construction and multi-factor stock-selection
+                            backtesting.
+                        </p>
+
+                        <p>
+                            Assisted with portfolio risk validation using
+                            volatility and Value at Risk metrics and documented
+                            quantitative experiments for digital investment
+                            advisory applications.
+                        </p>
+
+                        <div class="journey-tags">
                             <span>Python</span>
+                            <span>Factor Models</span>
                             <span>Backtesting</span>
                             <span>VaR</span>
                         </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 02 Drug Discovery -->
+            <article class="journey-entry entry-right">
+                <button
+                    class="journey-summary"
+                    type="button"
+                    aria-expanded="false"
+                >
+                    <span class="journey-dot"></span>
+
+                    <span class="journey-date">FEB — AUG 2026</span>
+                    <span class="journey-category">RESEARCH</span>
+
+                    <span class="journey-title">
+                        Mathematical Modelling for Drug Discovery
+                    </span>
+
+                    <span class="journey-place">
+                        University of Nottingham Ningbo China
+                    </span>
+
+                    <span class="journey-short">
+                        Two undergraduate research projects exploring
+                        mechanistic models, drug-target dynamics and numerical
+                        simulation.
+                    </span>
+
+                    <span class="journey-toggle">+</span>
+                </button>
+
+                <div class="journey-details">
+                    <div class="journey-details-inner">
+
+                        <div class="research-stage">
+                            <span class="research-stage-date">
+                                22 JUN — 22 AUG 2026
+                            </span>
+
+                            <h4>Drug Discovery Research II</h4>
+
+                            <p>
+                                Explored mathematical approaches for
+                                drug-discovery research through mechanistic
+                                differential-equation models, drug-target
+                                dynamics and computational simulation.
+                            </p>
+                        </div>
+
+                        <div class="research-stage">
+                            <span class="research-stage-date">FEB 2026</span>
+
+                            <h4>Drug Discovery Research I</h4>
+
+                            <p>
+                                Reviewed mathematical models related to drug
+                                discovery, extracted key equations from academic
+                                literature and reproduced selected model
+                                components using Python and numerical ODE
+                                methods.
+                            </p>
+                        </div>
+
+                        <div class="journey-tags">
+                            <span>ODE</span>
+                            <span>Runge–Kutta</span>
+                            <span>Drug Modelling</span>
+                            <span>Python</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 03 MCM -->
+            <article class="journey-entry entry-left">
+                <button
+                    class="journey-summary"
+                    type="button"
+                    aria-expanded="false"
+                >
+                    <span class="journey-dot"></span>
+
+                    <span class="journey-date">JAN — FEB 2026</span>
+                    <span class="journey-category">MODELLING</span>
+
+                    <span class="journey-title">
+                        MCM 2026 · Lunar Logistics Modelling
+                    </span>
+
+                    <span class="journey-place">
+                        COMAP Mathematical Contest in Modeling
+                    </span>
+
+                    <span class="journey-short">
+                        A multi-objective transportation strategy balancing
+                        cost, duration and environmental impact.
+                    </span>
+
+
+                    <span class="journey-toggle">
+                    +
+                    </span>
+                    </button>
+                    <div class="journey-preview">
+
+    <a href="assets/MCM.html" target="_blank">
+        VIEW MCM HTML
+    </a>
+
+</div>
+                
+
+                <div class="journey-details">
+                    
+                    <div class="journey-details-inner">
+                        <p>
+                            Collaboratively developed an optimisation model for
+                            transporting construction materials to a future
+                            lunar colony.
+                        </p>
+
+                        <p>
+                            Integrated learning-curve effects, inflation
+                            adjustment, the rocket equation, system-failure
+                            risks and environmental costs into a weighted
+                            nonlinear objective function. Modelled closed-loop
+                            water supply and conducted sensitivity analysis
+                            using MATLAB.
+                        </p>
+
+                        <div class="journey-results">
+                            <div>
+                                <strong>54%</strong>
+                                <span>shorter completion time</span>
+                            </div>
+
+                            <div>
+                                <strong>22%</strong>
+                                <span>lower cost</span>
+                            </div>
+                        </div>
+
+                        <div class="journey-tags">
+                            <span>Optimisation</span>
+                            <span>MATLAB</span>
+                            <span>Sensitivity Analysis</span>
+                        </div>
+                        <div class="journey-preview">
+
+     
+
+</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 04 CUMCM -->
+            <article class="journey-entry entry-right">
+                <button
+                    class="journey-summary"
+                    type="button"
+                    aria-expanded="false"
+                >
+                    <span class="journey-dot"></span>
+
+                    <span class="journey-date">SEP 2025</span>
+                    <span class="journey-category">MODELLING</span>
+
+                    <span class="journey-title">
+                        CUMCM · SiC Thickness Inversion
+                    </span>
+
+                    <span class="journey-place">
+                        China Undergraduate Mathematical Contest in Modeling
+                    </span>
+
+                    <span class="journey-short">
+                        Non-destructive epitaxial-layer thickness measurement
+                        using infrared interference spectroscopy.
+                    </span>
+
+                    <span class="journey-toggle">+</span>
+                </button>
+<div class="journey-preview">
+
+    <a href="assets/CUMCM.html" target="_blank">
+        VIEW CUMCM HTML
+    </a>
+
+</div>
+                <div class="journey-details">
+                    <div class="journey-details-inner">
+                        <p>
+                            Developed a thickness-inversion framework based on
+                            infrared interference spectroscopy. Compared
+                            multiple filtering methods and improved
+                            spectral-extrema detection using FFT and
+                            least-squares fitting.
+                        </p>
+
+                        <p>
+                            Extended the model using Cauchy dispersion and
+                            Drude–Lorentz equations and contributed to MATLAB
+                            implementation, academic writing and more than
+                            twenty technical visualisations.
+                        </p>
+
+                        <div class="journey-results">
+                            <div>
+                                <strong>0.9878</strong>
+                                <span>maximum R²</span>
+                            </div>
+
+                            <div>
+                                <strong>8.3306 μm</strong>
+                                <span>estimated SiC thickness</span>
+                            </div>
+                        </div>
+
+                        <div class="journey-tags">
+                            <span>FFT</span>
+                            <span>MATLAB</span>
+                            <span>Cauchy Model</span>
+                            <span>Drude–Lorentz</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 05 CELE -->
+            <article class="journey-entry entry-left">
+                <button
+                    class="journey-summary"
+                    type="button"
+                    aria-expanded="false"
+                >
+                    <span class="journey-dot"></span>
+
+                    <span class="journey-date">JUN 2025 — APR 2026</span>
+                    <span class="journey-category">INTERNSHIP</span>
+
+                    <span class="journey-title">
+                        Event and Marketing Office Intern
+                    </span>
+
+                    <span class="journey-place">
+                        Centre for English Language Education · UNNC
+                    </span>
+
+                    <span class="journey-short">
+                        Educational programme operations, bilingual
+                        communication and content production.
+                    </span>
+
+                    <span class="journey-toggle">+</span>
+                </button>
+
+                <div class="journey-details">
+                    <div class="journey-details-inner">
+                        <p>
+                            Supported external education programmes involving
+                            more than one hundred participants. Coordinated
+                            guests, documentation, financial reimbursement,
+                            reception, campus tours and on-site operations.
+                        </p>
+
+                        <p>
+                            Hosted programme sessions and contributed to
+                            official WeChat content writing and editing.
+                        </p>
+
+                        <ul class="journey-list">
+                            <li>REAP Onsite Teacher Training</li>
+                            <li>ZWU Teacher Training Programme</li>
+                            <li>AHS ICRL Summer Programme</li>
+                            <li>Official WeChat content production</li>
+                        </ul>
+
+                        <div class="journey-tags">
+                            <span>Event Operations</span>
+                            <span>Communication</span>
+                            <span>Content</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 06 Education -->
+            <article class="journey-entry entry-right">
+                <button
+                    class="journey-summary"
+                    type="button"
+                    aria-expanded="false"
+                >
+                    <span class="journey-dot"></span>
+
+                    <span class="journey-date">SEP 2024 — JUN 2028</span>
+                    <span class="journey-category">EDUCATION</span>
+
+                    <span class="journey-title">
+                        BSc Mathematics and Applied Mathematics
+                    </span>
+
+                    <span class="journey-place">
+                        University of Nottingham Ningbo China
+                    </span>
+
+                    <span class="journey-short">
+                        The academic foundation behind my work in modelling,
+                        statistics and quantitative research.
+                    </span>
+
+                    <span class="journey-toggle">+</span>
+                </button>
+
+                <div class="journey-details">
+                    <div class="journey-details-inner">
+                        <p class="education-gpa">GPA · 4.0 / 4.0</p>
+
+                        <p>
+                            Selected coursework includes probability and
+                            statistics, linear algebra, stochastic processes,
+                            time series, ordinary and partial differential
+                            equations and mathematical modelling.
+                        </p>
+
+                        <div class="journey-tags">
+                            <span>Mathematics</span>
+                            <span>Statistics</span>
+                            <span>Modelling</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- Additional Experience -->
+        <section class="additional-experience">
+            <button
+                class="additional-toggle"
+                type="button"
+                aria-expanded="false"
+            >
+                <span>
+                    <small>ADDITIONAL EXPERIENCE</small>
+                    View additional experience
+                    (9)
+                </span>
+
+                <span class="additional-toggle-icon">+</span>
+            </button>
+
+            <div class="additional-content">
+                <div class="additional-content-inner">
+                    <article class="additional-item">
+
+    <time>
+        MAR-MAY 2026
+    </time>
+
+
+    <div>
+
+        <h3>
+            AI & Data Analytics Career Exploration Project
+        </h3>
+
+
+        <p>
+            Participated in a 10-week AI and Data Analytics career exploration project mentored by IKEA’s Global People & Culture Partner. Investigated the AI/Data industry ecosystem, explored diverse career pathways, and developed a personalised career strategy through industry discussions, role analysis, and collaborative team projects.
+        </p>
+
+
+        <!-- 成果展示快捷键 -->
+        <div class="journey-preview">
+
+            <a href="assets/NAA1.pdf"
+               target="_blank">
+                VIEW CERTIFICATE
+            </a>
+
+            <!-- 如果是网页 -->
+            <!--
+            <a href="assets/report.html"
+               target="_blank">
+                OPEN HTML
+            </a>
+            -->
+
+
+            <!-- 如果有多个成果 -->
+            <!--
+            <a href="assets/image1.jpg"
+               target="_blank">
+                IMAGE 1
+            </a>
+
+            <a href="assets/image2.jpg"
+               target="_blank">
+                IMAGE 2
+            </a>
+            -->
+
+        </div>
+
+
+        <span>
+            AI Industry · Data Analytics · Career Strategy · Team Collaboration
+        </span>
+
+
+    </div>
+
+</article>
+
+<article class="additional-item">
+
+    <time>APR-JUN 2026</time>
+
+    <div>
+
+        <h3>Global Mentorship Programme · Professional Development</h3>
+
+        <p>
+            Participated in the Global Mentorship Programme (GMP), a professional development initiative connecting students with experienced industry leaders. Mentored by Victor Wu, Managing Director at Prax Capital, I gained insights into financial industry practices, career development strategies, and professional decision-making through regular mentorship discussions and knowledge exchange.
+        </p>
+
+        <div class="journey-preview">
+
+    <a href="assets/NAA2.pdf"
+       target="_blank">
+        VIEW CERTIFICATE
+    </a>
+
+</div>
+
+        <span>
+            Industry Mentorship · Finance · Career Development · Professional Communication
+        </span>
+
+    </div>
+
+</article>
+
+<article class="additional-item">
+
+    <time>
+        APR 2026
+    </time>
+
+
+    <div>
+
+        <h3>
+            Statistical Modelling of Educational Accessibility in Scotland
+        </h3>
+
+
+        <p>
+            Collaborated on a statistical modelling project analysing educational 
+            accessibility across Scotland using regional driving-time data. Applied 
+            statistical hypothesis testing, correlation analysis, ANOVA, and 
+            regression modelling in R to investigate differences in secondary school 
+            accessibility between regions and explore the relationship between 
+            socioeconomic factors and travel time.
+        </p>
+
+
+        <p>
+            Developed analytical frameworks to evaluate spatial heterogeneity and 
+            identify how regional characteristics influence educational accessibility 
+            patterns.
+        </p>
+
+
+        <div class="journey-preview">
+
+            <a href="assets/Group31.pdf"
+               target="_blank">
+                VIEW REPORT
+            </a>
+
+        </div>
+
+
+        <span>
+            Data Analytics · Statistical Modelling · R Programming · Regression Analysis
+        </span>
+
+
+    </div>
+
+</article>
+
+<article class="additional-item">
+
+    <time>MAR-JUN 2026</time>
+
+    <div>
+
+        <h3>PetInsightPro · Entrepreneurship & Product Innovation Project</h3>
+
+        <p>
+            Participated in the Business School Entrepreneurship Lab and applied analytical thinking to an entrepreneurial product development project. Led market research and user analysis for PetInsightPro, a smart pet health monitoring system, integrating customer insights, product design, and data-driven decision-making into a complete business proposal.
+        </p>
+
+        <div class="journey-preview">
+            <a href="assets/Pet.pdf"
+       target="_blank">
+        VIEW BUSINESS PLAN
+    </a>
+        </div>
+
+        <span>
+            Entrepreneurship · Product Strategy · Market Research · Business Modelling · Innovation
+        </span>
+
+    </div>
+
+</article>
+
+
+                    <article class="additional-item">
+                        <time>JAN 2026</time>
+                        <div>
+                            <h3>Probability Distributions with R</h3>
+                            <p>
+                                Produced an R Markdown report covering discrete
+                                and continuous distributions, mathematical
+                                properties and statistical visualisation.
+                            </p>
+                            <div class="journey-preview">
+
+    <a href="assets/Probability_Distributions_with_R.html"
+       target="_blank">
+        OPEN HTML REPORT
+    </a>
+
+</div>
+                            <span>R · R Markdown · Probability · Result 100%</span>
+                        </div>
                     </article>
 
-                    <article class="project-card reveal" style="--accent: var(--coral);">
+                    <article class="additional-item">
+                        <time>DEC 2025</time>
+                        <div>
+                            <h3>Numerical Analysis with Python</h3>
+                            <p>
+                                Implemented the conjugate-gradient method,
+                                golden-section search and implicit trapezoidal
+                                method with functional testing.
+                            </p>
+                            <span>Python · Numerical Analysis · Result 93%</span>
+                        </div>
+                    </article>
+
+                    <article class="additional-item">
+                        <time>NOV 2025</time>
+                        <div>
+                            <h3>Academic Poster on Bayes’ Theorem</h3>
+                            <p>
+                                Created logarithmic posterior-probability plots
+                                in MATLAB and contributed to an academic poster
+                                presentation.
+                            </p>
+                            <div class="journey-preview">
+
+    <a href="assets/Core-poster.pdf"
+       target="_blank">
+        VIEW POSTER PDF
+    </a>
+
+</div>
+                            <span>Bayesian Statistics · MATLAB · Result 91.13%</span>
+                        </div>
+                    </article>
+
+                    <article class="additional-item">
+                        <time>APR 2025</time>
+                        <div>
+                            <h3>HiRing Smart Gaming Controller</h3>
+                            <p>
+
+<b>Product Design</b>:
+A smart esports controller that connects electronics with physical exercise through motion sensors. 
+Using <b>Stardew Valley</b> as an example, actions like squatting, pressing pressure switches, and running/jumping trigger corresponding in-game tools and controls.<br>
+</p>
+<p>
+<b>Pain Points Solved</b>:
+Solves repetitive gaming experiences and low exercise self-discipline with a transparent, one-time purchase model (no hidden fees).
+</p>
+<p>
+<b>Key Responsibilities</b>:
+Involved in initial concept design, market research, pricing, and promotion strategies.
+                            </p>
+                            <div class="journey-preview">
+
+    <a href="assets/hiring1.pdf"
+       target="_blank">
+        Conceptual Diagram & Sensor Overview
+    </a>
+
+
+    <a href="assets/hiring2.jpg"
+       target="_blank">
+        Presentation
+    </a>
+
+
+    <a href="assets/hiring3.pdf"
+       target="_blank">
+        Certificate
+    </a>
+
+</div>
+                            <span>Product Concept · Market Research · Entrepreneurship</span>
+                        </div>
+                    </article>
+
+                    <article class="additional-item">
+                        <time>MAR 2025 — MAY 2026</time>
                         <div>
                             <h3>
-                                <span class="zh">可视化个人介绍</span>
-                                <span class="en">Visual Personal Profile</span>
+                                Portfolio Management and Financial Risk Analysis
                             </h3>
                             <p>
-                                <span class="zh">当前先嵌入已有 PDF。后续可以拆成网页端交互版，让成果、技能、时间线和作品预览更动态。</span>
-                                <span class="en">The existing PDF is embedded first. Later it can be rebuilt as an interactive web narrative with dynamic timelines, skills, and project previews.</span>
+                                Studied portfolio theory, Markowitz
+                                optimisation, CAPM, APT and financial risk
+                                management using Excel Solver.
                             </p>
-                        </div>
-                        <div class="project-meta">
-                            <span>Visualization</span>
-                            <span>Portfolio</span>
-                            <span>Storytelling</span>
+                            <span>Portfolio Theory · CAPM · Risk · Result 93.3/100</span>
                         </div>
                     </article>
+
                 </div>
-                <!-- 新增和首页同款右下角continue按钮 -->
-                <a class="hello-scroll" href="#projects">
-                    continue
-                </a>
-            </section>
-            
-<!--新的页面-->
-            <section id="projects" class="section">
-                <nav class="section-nav" aria-label="About navigation">
-    <a class="site-name" href="#home">Wanyu LIN</a>
-    <div class="section-nav-links">
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+            </div>
+        </section>
+
+        <a class="hello-scroll" href="#contact">
+    continue
+</a>
+
     </div>
-    
-</nav>
-                <div class="section-heading reveal">
-                    <div>
-                        
-                        <h2>
-                            Projects
-                        </h2>
-                    </div>
-                    <p>
-                        <span class="zh">我已经把你给的两个文件放进网站目录。PDF 可以直接预览，Word 简历目前提供下载/打开，之后可再转成网页简历或 PDF 简历。</span>
-                        <span class="en">The two files you shared are now inside the site directory. The PDF can be previewed directly, while the Word resume is available to open or download.</span>
-                    </p>
-                </div>
-
-                <div class="materials-grid">
-                    <div class="doc-list">
-                        <article class="doc-card reveal">
-                            <h3>
-                                <span class="zh">个人成果可视化 PDF</span>
-                                <span class="en">Visual Profile PDF</span>
-                            </h3>
-                            <p>
-                                <span class="zh">用于展示个人经历、成果和可视化表达能力的 31 页资料。</span>
-                                <span class="en">A 31-page visual profile presenting experience, achievements, and visual communication.</span>
-                            </p>
-                            <div class="doc-actions">
-                                <a class="button primary" href="assets/docs/auniy-lin-profile-visualization.pdf" target="_blank" rel="noreferrer">
-                                    <span class="zh">新窗口查看</span>
-                                    <span class="en">Open PDF</span>
-                                </a>
-                                <a class="button" href="assets/docs/auniy-lin-profile-visualization.pdf" download>
-                                    <span class="zh">下载 PDF</span>
-                                    <span class="en">Download PDF</span>
-                                </a>
-                            </div>
-                        </article>
-
-                        <article class="doc-card reveal">
-                            <h3>
-                                <span class="zh">中文简历 DOCX</span>
-                                <span class="en">Chinese Resume DOCX</span>
-                            </h3>
-                            <p>
-                                <span class="zh">当前版本来自你上传的中文简历，后续建议补一个英文版和 PDF 版，便于浏览器直接预览。</span>
-                                <span class="en">This comes from the Chinese resume you provided. A future English and PDF version will make browser preview easier.</span>
-                            </p>
-                            <div class="doc-actions">
-                                <a class="button primary" href="assets/docs/auniy-lin-cv-cn.docx">
-                                    <span class="zh">打开简历</span>
-                                    <span class="en">Open Resume</span>
-                                </a>
-                                <a class="button" href="assets/docs/auniy-lin-cv-cn.docx" download>
-                                    <span class="zh">下载 DOCX</span>
-                                    <span class="en">Download DOCX</span>
-                                </a>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="pdf-frame reveal" aria-label="Embedded visual profile PDF">
-                        <iframe src="assets/docs/auniy-lin-profile-visualization.pdf#view=FitH"></iframe>
-                    </div>
-                </div>
-            <!-- 新增和首页同款右下角continue按钮 -->
-                <a class="hello-scroll" href="#contact">
-                    continue
-                </a>
-            </section>
+</section>
 
             <section id="contact" class="section">
                 <nav class="section-nav" aria-label="Contact navigation">
                     <a class="site-name" href="#home">Wanyu LIN</a>
                     <div class="section-nav-links">
                         <a href="#about">About</a>
+                        <a href="#skills">Skills</a>
                         <a href="#experience">Experience</a>
-                        <a href="#projects">Projects</a>
                         <a href="#contact">Contact</a>
                     </div>
                     
@@ -3023,9 +4412,9 @@ feel free to contact me via email, or phone.
                     <div class="contact-links">
                         <a href="mailto:hvywl2@nottingham.edu.cn">hvywl2@nottingham.edu.cn</a>
                         <a href="tel:+8618382207138">+86 183 8220 7138</a>
-                        <a href="#projects">
-                            <span>  Back to Materials </span>
-                            <span class="en">Back to Materials</span>
+                        <a href="#experience">
+                            <span>  Back to Experience </span>
+                            <span class="en">Back to Experience</span>
                         </a>
                     </div>
                 </div>
@@ -3088,8 +4477,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const main = document.querySelector('main');
 
     const sections = document.querySelectorAll(
-        '#about, #experience, #projects, #contact'
-    );
+    '#about, #experience, #contact'
+);
 
     function activateNavigation(sectionId) {
         /* 清除全部导航栏的旧状态 */
@@ -3130,14 +4519,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* 页面首次打开或刷新时立即判断 */
     const initialSection =
-        window.location.hash.replace('#', '') || 'about';
+    window.location.hash.replace('#', '') || 'about';
 
-    if (
-        ['about', 'experience', 'projects', 'contact']
-            .includes(initialSection)
-    ) {
-        activateNavigation(initialSection);
-    }
+if (
+    ['about', 'skills', 'experience', 'contact']
+        .includes(initialSection)
+) {
+    activateNavigation(initialSection);
+}
 });
 </script>
 
@@ -3233,6 +4622,204 @@ document.querySelector('.skills-guide')?.addEventListener('click', (event) => {
         top: targetPosition - 40,
         behavior: 'smooth'
     });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const aboutSection = document.querySelector('#about');
+    const aboutWrapper = document.querySelector('.about-scroll-wrapper');
+    const skillsSection = document.querySelector('#skills');
+    const skillsNavLinks = document.querySelectorAll(
+        '.section-nav-links a[href="#skills"]'
+    );
+const aboutNavLinks = document.querySelectorAll(
+    '.section-nav-links a[href="#about"]'
+);
+function setActiveNav(target) {
+    document
+        .querySelectorAll('.section-nav-links a')
+        .forEach((link) => {
+            link.classList.toggle(
+                'active',
+                link.getAttribute('href') === `#${target}`
+            );
+        });
+}
+    function scrollToSkills() {
+    if (!aboutSection || !aboutWrapper || !skillsSection) return;
+
+    aboutSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+
+    const targetPosition =
+        skillsSection.getBoundingClientRect().top
+        - aboutWrapper.getBoundingClientRect().top
+        + aboutWrapper.scrollTop;
+
+    aboutWrapper.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+    });
+
+    /* 立即把 Skills 设置为高亮 */
+    setActiveNav('skills');
+}
+    skillsNavLinks.forEach((link) => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            history.replaceState(null, '', '#skills');
+            scrollToSkills();
+        });
+    });
+    /* 点击 About：进入 About 页面并将内部内容恢复到最顶部 */
+aboutNavLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        if (!aboutSection || !aboutWrapper) return;
+
+        history.replaceState(null, '', '#about');
+
+        /* 外层回到 About 页面 */
+        aboutSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+
+        /* About 内部回到最上方 */
+        aboutWrapper.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+        setActiveNav('about');
+    });
+});
+/* 根据 About 内部滚动位置切换 About / Skills 高亮 */
+if (aboutWrapper && skillsSection) {
+    aboutWrapper.addEventListener('scroll', () => {
+        const skillsTop =
+            skillsSection.getBoundingClientRect().top
+            - aboutWrapper.getBoundingClientRect().top;
+
+        if (skillsTop <= aboutWrapper.clientHeight * 0.35) {
+            setActiveNav('skills');
+        } else {
+            setActiveNav('about');
+        }
+    }, { passive: true });
+}
+    /* 如果用 index.html#skills 打开，自动进入 Skills */
+    if (window.location.hash === '#skills') {
+        requestAnimationFrame(scrollToSkills);
+    }
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    /* 核心经历点击展开 */
+    const journeyEntries =
+        document.querySelectorAll('.journey-entry');
+
+    journeyEntries.forEach((entry) => {
+        const button = entry.querySelector('.journey-summary');
+        const icon = entry.querySelector('.journey-toggle');
+
+        button.addEventListener('click', () => {
+            const willOpen = !entry.classList.contains('open');
+
+            /* 一次只展开一个主要经历 */
+            journeyEntries.forEach((otherEntry) => {
+                otherEntry.classList.remove('open');
+
+                const otherButton =
+                    otherEntry.querySelector('.journey-summary');
+
+                const otherIcon =
+                    otherEntry.querySelector('.journey-toggle');
+
+                otherButton.setAttribute('aria-expanded', 'false');
+                otherIcon.textContent = '+';
+            });
+
+            if (willOpen) {
+                entry.classList.add('open');
+                button.setAttribute('aria-expanded', 'true');
+                icon.textContent = '−';
+            }
+        });
+    });
+
+    /* Additional Experience 展开 */
+    const additionalSection =
+        document.querySelector('.additional-experience');
+
+    const additionalButton =
+        document.querySelector('.additional-toggle');
+
+    const additionalIcon =
+        document.querySelector('.additional-toggle-icon');
+
+    if (additionalSection && additionalButton && additionalIcon) {
+        additionalButton.addEventListener('click', () => {
+            const isOpen =
+                additionalSection.classList.toggle('open');
+
+            additionalButton.setAttribute(
+                'aria-expanded',
+                String(isOpen)
+            );
+
+            additionalIcon.textContent = isOpen ? '−' : '+';
+        });
+    }
+
+    /* 时间线滚动绘制 */
+    const experienceScroll =
+        document.querySelector('.experience-scroll');
+
+    const timeline =
+        document.querySelector('.journey-timeline');
+
+    const progressPath =
+        document.querySelector('.journey-line-progress');
+
+    if (experienceScroll && timeline && progressPath) {
+        const pathLength = progressPath.getTotalLength();
+
+        progressPath.style.strokeDasharray = pathLength;
+        progressPath.style.strokeDashoffset = pathLength;
+
+        function updateTimelineProgress() {
+            const timelineTop = timeline.offsetTop;
+            const timelineHeight = timeline.offsetHeight;
+
+            const visibleProgress =
+                experienceScroll.scrollTop
+                + experienceScroll.clientHeight * 0.55
+                - timelineTop;
+
+            const progress = Math.max(
+                0,
+                Math.min(1, visibleProgress / timelineHeight)
+            );
+
+            progressPath.style.strokeDashoffset =
+                pathLength * (1 - progress);
+        }
+
+        experienceScroll.addEventListener(
+            'scroll',
+            updateTimelineProgress,
+            { passive: true }
+        );
+
+        updateTimelineProgress();
+    }
 });
 </script>
 </body>
