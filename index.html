@@ -81,18 +81,7 @@ html {
     overflow: visible;
 }
 
-        .grain {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            opacity: 0;
-            background-image:
-                linear-gradient(rgba(24, 33, 47, 0.035) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(24, 33, 47, 0.028) 1px, transparent 1px);
-            background-size: 42px 42px;
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.12));
-            z-index: 0;
-        }
+
 
 main {
     position: relative;
@@ -363,34 +352,6 @@ main {
             margin-top: 30px;
         }
 
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 44px;
-            border: 0;
-            border-radius: 4px;
-            padding: 11px 16px;
-            background: transparent;
-            color: var(--cobalt);
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-        }
-
-        .button.primary {
-            border-color: transparent;
-            background: transparent;
-            color: var(--cobalt);
-        }
-
-        /* 🎯 无论是鼠标悬停(:hover)，还是当前处于激活状态(.button.active)，都保持变色效果 */
-.button:hover,
-.button.active {
-    border-color: var(--lemon) !important;
-    color: var(--midnight) !important;
-    background: linear-gradient(transparent calc(100% - 3px), var(--lemon) 0) !important;
-}
 
         .button.primary:hover {
             color: var(--cobalt);
@@ -577,12 +538,6 @@ main {
             width: 4px;
             background: var(--cobalt);
             transition: background 0.24s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(13, 30, 61, 0.16);
-            box-shadow: none;
         }
 
         .project-card:hover::before {
